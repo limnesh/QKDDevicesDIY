@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DIY Quantum Key Distribution (QKD) project page with BB84 theory, build guide, wiring diagram, calibration notes and three-part YouTube series.">
+  <title>DIY Quantum Key Distribution (QKD) | BB84 Build Guide</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b1220;
+    --surface: #111c2e;
+    --surface-hover: #18263b;
+    --surface-alt: #152238;
+    --text: #e7edf7;
+    --text-muted: #a5b4c8;
+    --heading: #f5f9ff;
+    --accent: #58c4ff;
+    --accent-hover: #93dcff;
+    --border: #2b3c55;
+    --border-soft: #20314a;
+    --success: #5ee1ac;
+    --warning: #fbbf6b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+  main { max-width:1040px; margin:0 auto; padding:35px 32px 75px; }
+  h1,h2,h3 { color:var(--heading); line-height:1.35; font-weight:650; letter-spacing:-0.025em; }
+  h1 { font-size:2.3rem; margin:16px 0 8px; font-weight:750; letter-spacing:-0.045em; }
+  h2 { font-size:1.55rem; margin:34px 0 18px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  h3 { font-size:1.18rem; margin:23px 0 12px; }
+  p { margin:12px 0 18px; }
+  strong { font-weight:650; color:#f5f8ff; }
+  a { color:var(--accent); text-decoration:none; text-underline-offset:3px; transition:color .15s ease; }
+  a:hover { color:var(--accent-hover); text-decoration:underline; }
+  a:focus-visible, summary:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:3px; }
+  hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+  .readme-center { text-align:center; padding:24px 10px 16px; }
+  .readme-center h1 { color:#f5f9ff; }
+  .readme-center h3 { color:#9ad9ff; font-weight:500; font-size:1.25rem; }
+  .readme-center p { color:var(--text-muted); }
+  .readme-center strong { color:#f5f9ff; }
+  .meta-line { font-size:.93rem; color:var(--text-muted); margin-top:16px; }
+  .table-scroll { width:100%; overflow-x:auto; margin:20px 0 26px; border:1px solid var(--border); border-radius:12px; background:var(--surface); }
+  table { width:100%; border-spacing:0; border-collapse:collapse; min-width:650px; font-size:.94rem; }
+  th,td { padding:14px 15px; vertical-align:top; text-align:left; border-bottom:1px solid var(--border); }
+  th+th,td+td { border-left:1px solid var(--border-soft); }
+  th { background:#1b2d47; color:#d2e9ff; font-weight:700; }
+  td { background:var(--surface); color:var(--text); }
+  tr:nth-child(even) td { background:var(--surface-alt); }
+  tr:hover td { background:var(--surface-hover); }
+  tr:last-child td { border-bottom:0; }
+  td strong { color:#ffffff; }
+  td a { color:#6dcfff; font-weight:550; }
+  code { background:#1d314c; color:#b8e5ff; border:1px solid #304760; border-radius:5px; padding:3px 7px; font-size:.91em; overflow-wrap:anywhere; white-space:normal; }
+  pre { background:#0e1a2c; border:1px solid var(--border); border-radius:10px; padding:17px; overflow-x:auto; }
+  pre code { background:transparent; border:0; padding:0; white-space:pre; }
+  blockquote { margin:22px 0; padding:13px 18px; border-left:4px solid var(--accent); border-radius:0 8px 8px 0; background:#13253a; color:#c7d6e9; }
+  blockquote p { margin:5px 0; color:#c7d6e9; }
+  details { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin:22px 0; }
+  details[open] { border-color:#3b6486; }
+  summary { cursor:pointer; font-weight:650; color:#a9ddff; font-size:1rem; }
+  summary:hover { color:#ffffff; }
+  details li { color:var(--text-muted); margin:8px 0; }
+  ul,ol { padding-left:25px; }
+  li { padding:3px 0; }
+  li::marker { color:#6bc8ff; }
+  .button, a.button { display:inline-block; background:#176a9d; color:#fff; padding:9px 17px; border:1px solid #3197cd; border-radius:8px; font-size:.93rem; font-weight:650; text-decoration:none; transition:background .2s ease; }
+  .button:hover, a.button:hover { background:#2385bc; color:#fff; text-decoration:none; }
+  img { max-width:100%; height:auto; }
+  .hero-img, .diagram-img { width:100%; border:1px solid var(--border); border-radius:14px; background:var(--surface); display:block; margin:16px 0 10px; }
+  .caption { color:var(--text-muted); font-size:.92rem; margin-top:-2px; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px; }
+  footer { text-align:center; color:var(--text-muted); font-size:.9rem; padding:25px 0; margin-top:35px; border-top:1px solid var(--border); }
+  @media (max-width: 820px) { .grid-2 { grid-template-columns:1fr; } }
+  @media (max-width: 680px) {
+    body { font-size:15px; line-height:1.65; }
+    main { padding:20px 17px 50px; }
+    h1 { font-size:1.85rem; }
+    h2 { font-size:1.35rem; }
+    h3 { font-size:1.1rem; }
+    .readme-center { padding:15px 0; }
+    .readme-center h3 { font-size:1.05rem; }
+    table { font-size:.88rem; }
+    th,td { padding:11px 10px; }
+    blockquote { padding:12px 14px; }
+    details { padding:13px 15px; }
+  }
+</style>
+</head>
+<body>
+<main>
+<div class="readme-center">
+  <h1>🔐 DIY Quantum Key Distribution (QKD)</h1>
+  <h3>BB84 theory, schematics, calibration and live Alice–Bob demonstration</h3>
+  <p><strong>A three-part DIY educational build using ESP32 boards, servo-driven polarization control, a polarizing beam splitter and OPT101 optical sensors.</strong></p>
+  <p class="meta-line"><a href="https://github.com/limnesh" target="_blank" rel="noopener noreferrer">GitHub project page</a> · Bahrain · DIY optics + embedded systems · Educational simulation</p>
+  <p><strong>This repository accompanies the YouTube video series, build notes, wiring diagram and calibration references.</strong></p>
+</div>
+<hr/>
+
+<h2>🎬 Video series</h2>
+<p>Watch the project in sequence: theory first, then schematics, then the complete Alice and Bob demonstration.</p>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>Video</th><th>Watch</th><th>What it covers</th></tr></thead>
+<tbody>
+<tr><td><strong>01 ⚛️</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 1 of 3: QKD Theory – BB84 Protocol</strong></td><td><a href="https://www.youtube.com/watch?v=QQfdprppMUg" target="_blank" rel="noopener noreferrer">Watch Part 1 ↗</a></td><td>Quantum threat, harvest now–decrypt later, BB84 states, sifting, QBER, error correction and privacy amplification concepts.</td></tr>
+<tr><td><strong>02 🧰</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 2 of 3: Schematics</strong></td><td><a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" target="_blank" rel="noopener noreferrer">Watch Part 2 ↗</a></td><td>Circuit and optical architecture for Alice, Bob and optional Eve modes, including sensors, servos and wireless reconciliation.</td></tr>
+<tr><td><strong>03 🔦</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 3 of 3: Alice &amp; Bob Demo</strong></td><td><a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" target="_blank" rel="noopener noreferrer">Watch Part 3 ↗</a></td><td>Physical build, optical alignment, live measurements, sifting and shared-key demonstration across a free-space link.</td></tr>
+</tbody></table></div>
+<p><strong>📺 <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" target="_blank" rel="noopener noreferrer">Open the full DIY QKD playlist</a></strong></p>
+
+<h2>📷 Selected visuals from the design deck</h2>
+<p>The figures below are adapted from your presentation material and help explain the end-to-end concept for the repository visitor.</p>
+<img class="hero-img" src="qkd_repo_assets/bb84_flow.png" alt="BB84 QKD simplified flow"/>
+<p class="caption"><strong>Figure 1.</strong> High-level BB84 flow: Alice prepares states, the optical channel carries the pulses, Bob measures them, and post-processing keeps only the useful information.</p>
+<img class="hero-img" src="qkd_repo_assets/qkd_vpn_replication.png" alt="Secure data replication using QKD-generated AES-256 keys"/>
+<p class="caption"><strong>Figure 2.</strong> Example application concept: using QKD-generated material to support secure keying for site-to-site protected data replication.</p>
+
+<h2>🧠 What this project is — and what it is not</h2>
+<blockquote>
+  <p><strong>Educational disclaimer:</strong> This is a DIY educational simulation inspired by the BB84 protocol. It demonstrates basis selection, detector imbalance, sifting and experimental error-rate analysis using low-cost classical optical components. It is <strong>not</strong> a production-grade or security-validated QKD system.</p>
+</blockquote>
+<p>A full QKD implementation normally requires true single-photon or properly calibrated weak-coherent sources, single-photon detectors (SPDs), careful side-channel analysis, authenticated classical communication and rigorous security proofs. This project instead focuses on learning the ideas with accessible hardware.</p>
+
+<h2>🧩 Main hardware blocks</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>Alice (transmitter)</h3>
+    <ul>
+      <li>ESP32 board</li>
+      <li>650 nm laser module</li>
+      <li>Linear polarizer</li>
+      <li>Half-wave plate (HWP) film on servo</li>
+      <li>Optional low-cost optical attenuator / decoy-state servo stage</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Bob (receiver)</h3>
+    <ul>
+      <li>ESP32 board</li>
+      <li>Receiver-side HWP on servo</li>
+      <li>Polarizing beam splitter (PBS)</li>
+      <li>Two OPT101 sensor channels</li>
+      <li>ADS1115 ADC and 4×4 keypad</li>
+    </ul>
+  </div>
+</div>
+
+<h2>🔌 Professional wiring &amp; optical architecture</h2>
+<p>Three vector diagrams separate the <strong>free-space optical path</strong> from the <strong>electrical wiring</strong>. Use the detailed Alice and Bob sheets for connection planning. They have labelled GPIOs, device terminals, power requirements and common-ground notes.</p>
+<img class="diagram-img" src="qkd_repo_assets/wiring_diagram.svg" alt="Overall optical path and Wi-Fi architecture, Alice to Bob" loading="lazy"/>
+<p class="caption"><strong>Figure 3.</strong> Optical and Wi-Fi connections between two electrically independent units. The red line is light, not an electrical wire.</p>
+<h3>Alice transmitter — pin-level wiring</h3>
+<a href="qkd_repo_assets/alice_wiring.svg" target="_blank" rel="noopener noreferrer"><img class="diagram-img" src="qkd_repo_assets/alice_wiring.svg" alt="Professional Alice GPIO and components schematic" loading="lazy"/></a>
+<p class="caption"><strong>Figure 4.</strong> Alice connections with laser-driver interface and servo signal and power references. <a href="qkd_repo_assets/alice_wiring.svg" target="_blank" rel="noopener noreferrer">View full-size SVG ↗</a></p>
+<h3>Bob receiver — pin-level wiring</h3>
+<a href="qkd_repo_assets/bob_wiring.svg" target="_blank" rel="noopener noreferrer"><img class="diagram-img" src="qkd_repo_assets/bob_wiring.svg" alt="Professional Bob GPIO, ADS1115, OPT101 and keypad schematic" loading="lazy"/></a>
+<p class="caption"><strong>Figure 5.</strong> Bob I²C, analog sensor and keypad connections with power and ground specifications. <a href="qkd_repo_assets/bob_wiring.svg" target="_blank" rel="noopener noreferrer">View full-size SVG ↗</a></p>
+<h3>Pin map — calibration/video hardware revision</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Unit</th><th>Component</th><th>Signal pins</th><th>Electrical connections / purpose</th></tr></thead><tbody>
+<tr><td>Alice</td><td>Laser module</td><td><code>GPIO14</code></td><td>GPIO to a suitable laser-control input or switching stage; module supply as rated</td></tr>
+<tr><td>Alice</td><td>HWP servo</td><td><code>GPIO18</code></td><td>Servo PWM signal; external 5 V and common ground</td></tr>
+<tr><td>Alice</td><td>Attenuator servo</td><td><code>GPIO17</code></td><td>Servo PWM signal; optional optical attenuation stage</td></tr>
+<tr><td>Bob</td><td>HWP servo</td><td><code>GPIO19</code></td><td>Servo PWM; external 5 V and common ground</td></tr>
+<tr><td>Bob</td><td>ADS1115</td><td><code>GPIO17 SDA / GPIO20 SCL</code></td><td>3.3 V and ground; ADS1115 address <code>0x48</code></td></tr>
+<tr><td>Bob</td><td>OPT101 outputs</td><td><code>ADS1115 A0 / A1</code></td><td>One photodiode channel per PBS output; sensor ground shared with ADC</td></tr>
+<tr><td>Bob</td><td>Keypad rows</td><td><code>11, 12, 13, 14</code></td><td>Passive 4×4 matrix keypad R1–R4</td></tr>
+<tr><td>Bob</td><td>Keypad columns</td><td><code>18, 8, 9, 10</code></td><td>Passive 4×4 matrix keypad C1–C4</td></tr>
+</tbody></table></div>
+<blockquote><p><strong>Firmware revision matters:</strong> The earlier calibration/video hardware uses Alice <code>GPIO14</code> for the laser and <code>GPIO17</code> for the attenuator servo. The separately documented <em>V2 keypad firmware</em> uses <code>GPIO17</code> for the laser and leaves <code>GPIO14</code> untouched (no decoy motor). <strong>Do not mix the pin maps.</strong> Check <code>LASER_PIN</code> and servo pin definitions in the firmware actually installed before applying power.</p></blockquote>
+<p><strong>Safety:</strong> Do not drive a laser module or servos above ESP32 GPIO current limits. Use a stable servo power supply, common ground within each unit, a suitable laser driver/switch and an effective beam stop. Bob's GPIO20 is used for I²C SCL in this revision; use the appropriate UART debug port rather than conflicting native USB signals.</p>
+<h2>🛠️ Build components</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>Category</th><th>Typical items</th></tr></thead>
+<tbody>
+<tr><td><strong>Microcontrollers &amp; electronics</strong></td><td>2× ESP32 development boards, ADS1115 ADC, 2× OPT101, 2× micro servos, 4×4 keypad, jumper wires, breadboard/perfboard, 5 V power supply</td></tr>
+<tr><td><strong>Optics</strong></td><td>650 nm laser diode module, linear polarizer film, HWP / retarder film, PBS cube, optional 50/50 non-polarizing beam splitter for Eve mode, 50% sun film attenuator</td></tr>
+<tr><td><strong>Mechanical build</strong></td><td>Clear acrylic sheets, small brackets, mounts, hot glue, fasteners, beam-stop and alignment aids</td></tr>
+</tbody></table></div>
+<div class="grid-2">
+  <div>
+    <img class="hero-img" src="qkd_repo_assets/esp32s3_board.png" alt="ESP32 board with screen"/>
+    <p class="caption"><strong>Reference image.</strong> Example ESP32-S3 display board style used in the project.</p>
+  </div>
+  <div class="card">
+    <h3>Assembly order</h3>
+    <ol>
+      <li>Build and test Alice laser switching and the two servo movements.</li>
+      <li>Build Bob with the HWP servo, PBS, dual OPT101 channels and ADS1115.</li>
+      <li>Verify keypad control and Bob sensor readout.</li>
+      <li>Mount the optical components mechanically.</li>
+      <li>Do short-range alignment before any longer-distance free-space test.</li>
+    </ol>
+  </div>
+</div>
+
+<h2>⚛️ BB84 concepts explained simply</h2>
+<p>In the BB84 idea, Alice randomly chooses a basis and a bit, then encodes that bit into one of four optical states. Bob randomly chooses a basis to measure the incoming pulse. When Bob’s basis matches Alice’s basis, the measurement should agree more strongly with the transmitted state. When the bases do not match, the result should be ambiguous or randomly split.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Alice basis</th><th>Bit</th><th>Conceptual state</th><th>What Bob should see</th></tr></thead>
+<tbody>
+<tr><td><strong>+</strong></td><td>0</td><td>One polarization orientation</td><td>Strong dominance on one detector when Bob uses +</td></tr>
+<tr><td><strong>+</strong></td><td>1</td><td>Orthogonal orientation</td><td>Strong dominance on the other detector when Bob uses +</td></tr>
+<tr><td><strong>×</strong></td><td>0</td><td>Diagonal orientation</td><td>Strong dominance on one detector when Bob uses ×</td></tr>
+<tr><td><strong>×</strong></td><td>1</td><td>Other diagonal orientation</td><td>Strong dominance on the other detector when Bob uses ×</td></tr>
+</tbody></table></div>
+<p>After measurement, Alice and Bob publicly compare <em>bases only</em>. They discard mismatched-basis positions. The remaining matching-basis data become the sifted key material. In a true QKD system, additional authenticated post-processing is required for reconciliation and privacy amplification.</p>
+
+<h2>💻 Firmware overview</h2>
+<p>The code on both ESP32 boards is split into two roles.</p>
+<div class="grid-2">
+  <div class="card">
+    <h3>Alice code</h3>
+    <ul>
+      <li>Chooses a random basis and bit in automatic mode</li>
+      <li>Moves the Alice HWP servo to the corresponding calibrated angle</li>
+      <li>Controls the laser pulse timing</li>
+      <li>Optionally drives the attenuator / decoy servo</li>
+      <li>Exchanges status with Bob over Wi-Fi / TCP</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Bob code</h3>
+    <ul>
+      <li>Selects a measurement basis</li>
+      <li>Moves Bob’s HWP servo</li>
+      <li>Reads A0 / A1 through the ADS1115</li>
+      <li>Subtracts ambient light and computes detector shares</li>
+      <li>Logs basis matches, rejects weak or mixed events and estimates QBER</li>
+    </ul>
+  </div>
+</div>
+<pre><code>Automatic session logic (simplified)
+1. Alice chooses random basis + bit.
+2. Alice moves HWP and waits ready.
+3. Bob chooses a random basis and moves his HWP.
+4. Bob samples ambient light.
+5. Alice emits a short laser pulse.
+6. Bob reads A0 and A1 through ADS1115.
+7. Bob subtracts ambient baseline and classifies the result.
+8. Alice and Bob reveal bases, keep only matched-basis slots.
+9. Bob estimates QBER from the kept bits.
+10. Public checks / fingerprints confirm both sides derived the same sifted sequence.</code></pre>
+
+<h2>📊 Optical calibration — measured results</h2>
+<p>Before the final demonstration, Alice and Bob's half-wave-plate (HWP) servo angles were calibrated using <strong>dual OPT101 sensors and the ADS1115 ADC</strong>. The analysis below comes from the recorded <strong>9–10 November 2026</strong> voltage logs and the earlier <em>BB84 Optical Voltage Analysis</em> report, rather than idealized theoretical curves.</p>
+<img class="hero-img" src="qkd_repo_assets/calibration_heatmap_5deg.png" alt="Measured signed detector contrast heatmap for the complete 5 degree by 5 degree Alice and Bob servo angle scan" loading="lazy"/>
+<p class="caption"><strong>Figure 6 — actual measured 5° × 5° calibration heatmap.</strong> Horizontal axis: Bob servo angle (0°–180°); vertical axis: Alice servo angle (0°–180°). Red indicates stronger net A0 output, blue stronger net A1, and pale zones approximately balanced detector contributions. White markers show early candidate angle pairs; final +1 was refined to 29° after this coarse scan.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Recorded calibration measure</th><th>Result</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><strong>Total voltage observations</strong></td><td><strong>3,587</strong> CSV rows across 10 files</td><td>Combined calibration/validation dataset</td></tr>
+<tr><td><strong>Completed HWP angle grid</strong></td><td><strong>1,369 / 1,369</strong> at 5° steps</td><td>37 Alice positions × 37 Bob positions</td></tr>
+<tr><td><strong>Early fine scan</strong></td><td><strong>1,653 / 32,761</strong> positions</td><td>Initial 1° raster was intentionally stopped, not a completed grid</td></tr>
+<tr><td><strong>Final free-space validation</strong></td><td><strong>24 readings at 4.5 m</strong></td><td>12 matched-basis dominant results and 12 wrong-basis MIXED</td></tr>
+<tr><td><strong>ADC clipping flags</strong></td><td><strong>0</strong> across saved rows</td><td>No recorded clipped measurements in these logs</td></tr>
+</tbody></table></div>
+<h3>Calibrated servo angles used in the demonstration</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Alice state</th><th>Alice HWP</th><th>Bob matching basis</th><th>Bob HWP</th><th>Expected dominant detector</th></tr></thead><tbody>
+<tr><td><strong>+ bit 0</strong></td><td>120°</td><td>+</td><td>50°</td><td>A0</td></tr>
+<tr><td><strong>+ bit 1</strong></td><td>29°</td><td>+</td><td>50°</td><td>A1</td></tr>
+<tr><td><strong>× bit 0</strong></td><td>165°</td><td>×</td><td>105°</td><td>A0</td></tr>
+<tr><td><strong>× bit 1</strong></td><td>65°</td><td>×</td><td>105°</td><td>A1</td></tr>
+</tbody></table></div>
+<p><strong>Why 29° instead of 25°?</strong> In repeated trials the original Alice +1 angle (25°) gave a wrong-basis contrast of about <strong>20.75%</strong>, outside the diagnostic MIXED region (&lt;15%). After 1° refinement, 29° reduced the repeated wrong-basis contrast to about <strong>6.96%</strong> while retaining <strong>96.27%</strong> contrast in the correct basis.</p>
+<div class="grid-2">
+<div><img class="hero-img" src="qkd_repo_assets/calibration_29deg_refinement.png" alt="Measured improvement of wrong-basis detector balance after changing Alice angle to 29 degrees" loading="lazy"/><p class="caption"><strong>Figure 7.</strong> How the 29° adjustment improved wrong-basis balance.</p></div>
+<div><img class="hero-img" src="qkd_repo_assets/calibration_4p5m_validation.png" alt="24 recorded 4.5 metre samples showing matched basis dominant and wrong basis balanced optical classifications" loading="lazy"/><p class="caption"><strong>Figure 8.</strong> Final 4.5 m checks: 12 matched-basis and 12 wrong-basis observations.</p></div>
+</div>
+<h3>What the firmware measures</h3>
+<p>Each detector channel is read with the laser off and on. The software subtracts the ambient baseline from each optical voltage before comparing their relative strengths:</p>
+<pre><code>D0 = max(0, A0_ON - A0_DARK)
+D1 = max(0, A1_ON - A1_DARK)
+S  = D0 + D1
+contrast = 100 * abs(D0 - D1) / S     (when S &gt; 0)
+A0_share = 100 * D0 / S
+A1_share = 100 * D1 / S</code></pre>
+<p><strong>Interpretation:</strong> High contrast on a matched basis means one output of Bob's PBS dominates; low contrast for a mismatched basis means the <em>classical optical intensity</em> splits approximately equally. The historical report used a &lt;15% MIXED diagnostic threshold, while some later firmware revisions offer an independently adjustable optical threshold. These are analog classification criteria, <strong>not quantum-mechanical single-photon outcomes or proof of quantum secrecy</strong>.</p>
+<h3>Practical calibration procedure</h3>
+<ol>
+<li>Align the transmitter laser, receiver HWP, PBS and both photodiodes at short range with the beam safely terminated.</li>
+<li>Measure laser-off ambient levels on A0 and A1, then verify neither ADC input is clipping when the laser is on.</li>
+<li>Sweep Alice and Bob HWP angles in 5° steps to locate strong A0/A1 dominance and near-balanced regions.</li>
+<li>Fix Bob near + = 50° and × = 105°, then refine the candidate Alice settings (using 1° steps around troublesome states).</li>
+<li>Repeat all eight Alice-state/Bob-basis combinations and verify the four matched combinations are dominant while the four mismatched combinations are balanced.</li>
+<li>Repeat at the target free-space distance, with changed room lighting; record voltages and update the firmware calibration constants if optical alignment has shifted.</li>
+</ol>
+<blockquote><p><strong>Research interpretation:</strong> The 24-point 4.5 m test supports successful optical/analog separation for this educational apparatus. It does not demonstrate a low quantum bit error rate, single-photon security, or a production-ready QKD key rate. For the full evidence, refer to the original November 2026 voltage analysis report.</p></blockquote>
+<h2>🔗 Continue exploring</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>Project / website</th><th>Explore</th></tr></thead>
+<tbody>
+<tr><td><strong>MeetICT &amp; BITEX 2026 — Quantum Security 101</strong></td><td><a href="https://github.com/limnesh/bitex" target="_blank" rel="noopener noreferrer">🔐 GitHub · limnesh/bitex</a></td></tr>
+<tr><td><strong>DPS-QKD over Free-Space Optical Channels — Project Report</strong></td><td><a href="https://limnesh.github.io/QuantumKeyDistribution-DPS/DPS_QKD_FSO_Project_Report_v1.0.html" target="_blank" rel="noopener noreferrer">📖 Read the research report</a></td></tr>
+<tr><td><strong>QKD over Free-Space Optical Communication — Project Report</strong></td><td><a href="https://limnesh.github.io/QuantumKeyDistribution-FSO/QKD_FSO_Project_Report-v1.0.html" target="_blank" rel="noopener noreferrer">📖 Read the project report</a></td></tr>
+<tr><td><strong>3D Couple — Art that changes perspective</strong></td><td><a href="https://3dcouple.com/" target="_blank" rel="noopener noreferrer">🎨 Visit 3dcouple.com</a></td></tr>
+<tr><td><strong>ATCSpeak — Aviation communication practice</strong></td><td><a href="https://www.atcspeak.com" target="_blank" rel="noopener noreferrer">✈️ Visit ATCSpeak</a></td></tr>
+</tbody></table></div>
+
+<h2>👨‍🚀 About the presenter — Limnesh Augustine</h2>
+<p><strong>Limnesh Augustine</strong> is an <strong>Electronics and Communication Engineer (BTech)</strong> and <strong>Project Manager at Gulf Business Machines (GBM), Bahrain</strong>, with over two decades of IT experience. He previously served as <strong>Head of IT</strong> for the Works Directorate and subsequently the Planning &amp; Future Systems Directorate at the <strong>Ministry of Interior, Bahrain</strong>, until 2019.</p>
+<p>Beyond technology, he is an internationally recognized <strong>3D anamorphic artist</strong>, a multiple <strong>Guinness World Record holder</strong> (Bahrain and USA), recipient of Italy’s <strong>Madonnari title</strong>, and an <strong>EASA-licensed Private Pilot(Airplane)</strong>. His creative work includes collaborations with <strong>FAO, UNDP, WHO and WWF</strong> and participation in UN-related initiatives. Explore his art at <strong><a href="https://3dcouple.com/" rel="noopener noreferrer" target="_blank">3DCouple.com</a></strong> and his aviation learning project at <strong><a href="https://www.atcspeak.com" rel="noopener noreferrer" target="_blank">ATCSpeak</a></strong>.</p>
+<p>His interests span <strong>Quantum computing, Quantum communication, QKD, free-space optics and AI</strong>. He has completed postgraduate studies in Quantum Communications at <strong>IIT Delhi</strong>, presented a <strong>2025 IEEE paper</strong> on AI-based art evaluation, and won the <strong>2019 Hacking (CTF) competition</strong> organized by CID, Ministry of Interior, Bahrain</p>
+<details>
+  <summary><strong>🛠️ Important implementation notes</strong></summary>
+  <ul>
+    <li><strong>Laser safety:</strong> use a proper beam stop and avoid eye-level beam paths or reflective surfaces.</li>
+    <li><strong>Servo power:</strong> use a stable 5 V supply and common ground between the ESP32 and all external modules.</li>
+    <li><strong>GPIO caution:</strong> if your repository firmware uses different GPIO assignments than the ones shown here, update the table and SVG to match the code before publishing.</li>
+    <li><strong>Terminology caution:</strong> it is safer to describe the output as an educational BB84-inspired key-establishment demonstration rather than a cryptographically validated quantum-secure system.</li>
+  </ul>
+</details>
+
+<footer>
+  DIY Quantum Key Distribution (QKD) · Educational repository page · Built in BITEX-style layout for GitHub Pages
+</footer>
+</main>
+</body>
+</html>
