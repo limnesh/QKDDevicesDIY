@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -244,7 +245,47 @@ main { max-width: 1120px; }
 <span aria-hidden="true" class="photo-zoom">⤢</span>
 </a>
 <figcaption><strong>Bob — assembled receiver</strong><span>The real Bob receiver assembly with beam-splitting optics, sensors and control electronics.</span></figcaption>
-</figure></div><h3>Optical transmission and alignment</h3><p class="gallery-description">The visible laser beam travels between the independently powered transmitter and receiver assemblies.</p><div class="photo-grid photo-grid-link"><figure class="photo-card photo-testing">
+</figure></div><section aria-labelledby="videos-heading" class="content-section" id="videos">
+<span class="gallery-kicker">WATCH THE PROJECT · THREE-PART SERIES</span>
+<h2 id="videos-heading">🎬 Watch the QKD experiment</h2>
+<p>See how the BB84 ideas connect to the actual Alice and Bob hardware. The videos play directly here, beginning with the theory, followed by the electronics and the live demonstration.</p>
+<div class="video-grid">
+<article class="video-card">
+<div class="video-number">PART 01 · THEORY</div>
+<div class="video-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/QQfdprppMUg" title="Part 1 of 3: QKD Theory and BB84 Protocol"></iframe>
+</div>
+<div class="video-info">
+<h3>QKD Theory — BB84 Protocol</h3>
+<p>Quantum threats, basis selection, sifting, QBER, error correction and privacy amplification.</p>
+<a href="https://www.youtube.com/watch?v=QQfdprppMUg" rel="noopener noreferrer" target="_blank">Watch on YouTube ↗</a>
+</div>
+</article>
+<article class="video-card">
+<div class="video-number">PART 02 · HARDWARE</div>
+<div class="video-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/PlUNMTqOUZk" title="Part 2 of 3: DIY QKD Schematics and Hardware"></iframe>
+</div>
+<div class="video-info">
+<h3>Schematics and Hardware</h3>
+<p>Alice, Bob and optional Eve architecture: optics, servos, sensors and embedded controllers.</p>
+<a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" rel="noopener noreferrer" target="_blank">Watch on YouTube ↗</a>
+</div>
+</article>
+<article class="video-card video-card-featured">
+<div class="video-number">PART 03 · LIVE DEMONSTRATION</div>
+<div class="video-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/szPJ-WF4D5k" title="Part 3 of 3: Live Alice and Bob DIY QKD Demonstration"></iframe>
+</div>
+<div class="video-info">
+<h3>Alice &amp; Bob — Live Demonstration</h3>
+<p>The physical free-space link, alignment, optical measurements, basis sifting and shared AES-256 demonstration key.</p>
+<a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" rel="noopener noreferrer" target="_blank">Watch on YouTube ↗</a>
+</div>
+</article>
+</div>
+<p class="video-playlist">Prefer watching in sequence? <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" rel="noopener noreferrer" target="_blank">Open the complete YouTube playlist ↗</a></p>
+</section><h3>Optical transmission and alignment</h3><p class="gallery-description">The visible laser beam travels between the independently powered transmitter and receiver assemblies.</p><div class="photo-grid photo-grid-link"><figure class="photo-card photo-testing">
 <a aria-label="View larger: Free-space laser transmission" class="photo-link" data-caption="Free-space laser transmission" data-preview="true" href="images/Transmission.webp">
 <img alt="Laser alignment and the optical transmission path in the assembled demonstrator." decoding="async" loading="lazy" src="images/Transmission.webp"/>
 <span aria-hidden="true" class="photo-zoom">⤢</span>
@@ -317,40 +358,37 @@ main { max-width: 1120px; }
 </div>
 </div>
 </div>
-
-
 <div class="success-panel" id="key-success">
 <span class="gallery-kicker">05 · SUCCESSFUL KEY AGREEMENT</span>
 <h2>Alice and Bob — AES-256 demo key agreed</h2>
 <p>In a successful demonstration run, Alice displayed <strong>KEY AGREED</strong> and a shared <strong>256-bit demo key</strong>. The screen recorded <strong>QBER 0.00%</strong> for this run, contrasting with the rejected-block result during the simulated Eve interception shown above.</p>
 <div class="success-layout">
-  <figure class="photo-card photo-success">
-    <a aria-label="View larger: Alice showing successful AES-256 demo key agreement" class="photo-link" data-caption="Successful key agreement — Alice AES-256 demo key" data-preview="true" href="images/AESKeyGenerated.webp">
-      <img alt="Alice display showing AES-256 DEMO KEY, KEY AGREED, RUN 8, RAW 896 and QBER 0.00%, followed by the resulting demonstration key." decoding="async" loading="lazy" src="images/AESKeyGenerated.webp"/>
-      <span aria-hidden="true" class="photo-zoom">⤢</span>
-    </a>
-    <figcaption><strong>Successful key agreement — Alice display</strong><span>KEY AGREED: the 256-bit demonstration key is shown on the device after a completed run.</span></figcaption>
-  </figure>
-  <div class="success-details">
-    <h3>What the successful run shows</h3>
-    <div class="metrics">
-      <div><strong>Agreed</strong><span>Key status</span></div>
-      <div><strong>0.00%</strong><span>Displayed QBER</span></div>
-      <div><strong>8</strong><span>Run number</span></div>
-      <div><strong>896</strong><span>RAW counter</span></div>
-    </div>
-    <p>The firmware completed its educational basis comparison, error checking and key-processing flow and reported an agreed demo key. The screen displays the 64-character hexadecimal representation of the 256-bit value.</p>
-    <p class="scope-note">The device itself labels this a <strong>demo key</strong> and <strong>not quantum-secure QKD</strong>. A displayed agreement and zero error rate for one run do not establish cryptographic security.</p>
-  </div>
+<figure class="photo-card photo-success">
+<a aria-label="View larger: Alice showing successful AES-256 demo key agreement" class="photo-link" data-caption="Successful key agreement — Alice AES-256 demo key" data-preview="true" href="images/AESKeyGenerated.webp">
+<img alt="Alice display showing AES-256 DEMO KEY, KEY AGREED, RUN 8, RAW 896 and QBER 0.00%, followed by the resulting demonstration key." decoding="async" loading="lazy" src="images/AESKeyGenerated.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Successful key agreement — Alice display</strong><span>KEY AGREED: the 256-bit demonstration key is shown on the device after a completed run.</span></figcaption>
+</figure>
+<div class="success-details">
+<h3>What the successful run shows</h3>
+<div class="metrics">
+<div><strong>Agreed</strong><span>Key status</span></div>
+<div><strong>0.00%</strong><span>Displayed QBER</span></div>
+<div><strong>8</strong><span>Run number</span></div>
+<div><strong>896</strong><span>RAW counter</span></div>
+</div>
+<p>The firmware completed its educational basis comparison, error checking and key-processing flow and reported an agreed demo key. The screen displays the 64-character hexadecimal representation of the 256-bit value.</p>
+<p class="scope-note">The device itself labels this a <strong>demo key</strong> and <strong>not quantum-secure QKD</strong>. A displayed agreement and zero error rate for one run do not establish cryptographic security.</p>
 </div>
 </div>
-
+</div>
 <div class="section-intro chapter-intro" id="component-photos">
 <span class="gallery-kicker">06 · COMPONENT INVENTORY</span>
 <h2>Photographs of the parts used</h2>
 <p>Explore the optical elements, microcontrollers, detectors, servos, connectors and mechanical materials used to assemble the demonstrator.</p>
 </div>
-<details class="component-drawer" open>
+<details class="component-drawer" open="">
 <summary>View the 15 component photographs <span class="drawer-hint">Expand gallery</span></summary>
 <div class="component-gallery-holder"><div class="photo-grid photo-grid-components"><figure class="photo-card photo-component">
 <a aria-label="View larger: ESP32 controller" class="photo-link" data-caption="ESP32 controller" data-preview="true" href="images/ESP32.webp">
@@ -445,46 +483,6 @@ main { max-width: 1120px; }
 </figure></div></div>
 </details>
 <p class="gallery-footnote">This is a classical optical teaching apparatus inspired by BB84. The laboratory readings are discussed in the <a href="#calibration">measured calibration section</a>.</p>
-</section><section class="content-section" id="videos" aria-labelledby="videos-heading">
-  <span class="gallery-kicker">WATCH THE PROJECT · THREE-PART SERIES</span>
-  <h2 id="videos-heading">🎬 Watch the QKD experiment</h2>
-  <p>See how the BB84 ideas connect to the actual Alice and Bob hardware. The videos play directly here, beginning with the theory, followed by the electronics and the live demonstration.</p>
-  <div class="video-grid">
-    <article class="video-card">
-      <div class="video-number">PART 01 · THEORY</div>
-      <div class="video-frame">
-        <iframe src="https://www.youtube-nocookie.com/embed/QQfdprppMUg" title="Part 1 of 3: QKD Theory and BB84 Protocol" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <h3>QKD Theory — BB84 Protocol</h3>
-        <p>Quantum threats, basis selection, sifting, QBER, error correction and privacy amplification.</p>
-        <a href="https://www.youtube.com/watch?v=QQfdprppMUg" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
-      </div>
-    </article>
-    <article class="video-card">
-      <div class="video-number">PART 02 · HARDWARE</div>
-      <div class="video-frame">
-        <iframe src="https://www.youtube-nocookie.com/embed/PlUNMTqOUZk" title="Part 2 of 3: DIY QKD Schematics and Hardware" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <h3>Schematics and Hardware</h3>
-        <p>Alice, Bob and optional Eve architecture: optics, servos, sensors and embedded controllers.</p>
-        <a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
-      </div>
-    </article>
-    <article class="video-card video-card-featured">
-      <div class="video-number">PART 03 · LIVE DEMONSTRATION</div>
-      <div class="video-frame">
-        <iframe src="https://www.youtube-nocookie.com/embed/szPJ-WF4D5k" title="Part 3 of 3: Live Alice and Bob DIY QKD Demonstration" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <h3>Alice &amp; Bob — Live Demonstration</h3>
-        <p>The physical free-space link, alignment, optical measurements, basis sifting and shared AES-256 demonstration key.</p>
-        <a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
-      </div>
-    </article>
-  </div>
-  <p class="video-playlist">Prefer watching in sequence? <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" target="_blank" rel="noopener noreferrer">Open the complete YouTube playlist ↗</a></p>
 </section><section class="content-section" id="purpose"><h2>🧠 What this project is — and what it is not</h2>
 <blockquote>
 <p><strong>Educational disclaimer:</strong> This is a DIY educational simulation inspired by the BB84 protocol. It demonstrates basis selection, detector imbalance, sifting and experimental error-rate analysis using low-cost classical optical components. It is <strong>not</strong> a production-grade or security-validated QKD system.</p>
@@ -680,7 +678,6 @@ A1_share = 100 * D1 / S</code></pre>
 <li><strong>Terminology caution:</strong> it is safer to describe the output as an educational BB84-inspired key-establishment demonstration rather than a cryptographically validated quantum-secure system.</li>
 </ul>
 </details>
-
 </section><footer>
   DIY Quantum Key Distribution (QKD) · Educational repository page · Built in BITEX-style layout for GitHub Pages
 </footer></main>
