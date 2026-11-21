@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="DIY Quantum Key Distribution (QKD) project page with BB84 theory, build guide, wiring diagram, calibration notes and three-part YouTube series.">
-  <title>DIY Quantum Key Distribution (QKD) | BB84 Build Guide</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="DIY Quantum Key Distribution (QKD) project page with BB84 theory, build guide, wiring diagram, calibration notes and three-part YouTube series." name="description"/>
+<title>DIY Quantum Key Distribution (QKD) | BB84 Build Guide</title>
 <style>
   :root {
     color-scheme: dark;
@@ -146,271 +146,339 @@
     .photo-grid-testing { grid-template-columns:1fr; }
   }
 
+
+/* 2026-11 page organization improvements (keeps original palette and author captions) */
+main { max-width: 1120px; }
+.content-section { scroll-margin-top: 95px; padding-top: 18px; }
+.content-section > h2 { margin-top: 20px; }
+.hardware-gallery > .section-intro, .chapter-intro { scroll-margin-top: 100px; }
+.chapter-intro { padding-top: 16px; margin-top: 35px; border-top: 1px solid var(--border); }
+.chapter-intro h2 { border:0; margin-top:6px; padding-bottom:0; margin-bottom:12px; }
+.hardware-gallery > .section-intro h2 { margin-top: 9px; }
+.jump-nav { position:sticky; top:0; z-index:10; background:rgba(11,18,32,.95); backdrop-filter: blur(14px); padding: 11px 8px; border: 1px solid #2a3b52; border-radius: 14px; margin-top:22px; }
+.jump-nav a { white-space:nowrap; }
+.photo-grid-link { grid-template-columns: minmax(0,1fr); max-width: 680px; }
+.photo-grid-link .photo-link { aspect-ratio:16/9; }
+.photo-grid-operations { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.photo-grid-operations .photo-link { aspect-ratio:4/3; }
+.photo-grid-operations .photo-link img { object-fit:contain; }
+.photo-grid-operations .photo-card figcaption { min-height: 94px; }
+.eve-panel { scroll-margin-top:100px; margin:42px 0 30px; padding:28px; background:linear-gradient(125deg,#132137 0%,#101b2e 85%); border:1px solid #3b5570; border-radius:16px; }
+.eve-panel h2 { border:0; margin: 9px 0 14px; padding:0; }
+.eve-panel>p { color:#cad9e8; }
+.eve-layout { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:20px; align-items:start; margin-top:22px; }
+.photo-eve .photo-link { aspect-ratio: 6/5; }
+.photo-eve .photo-link img { object-fit:contain; }
+.eve-details { min-width:0; }
+.eve-details h3 { margin:3px 0 16px; }
+.eve-details p { font-size:.92rem; line-height:1.7; }
+.metrics { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:18px; }
+.metrics>div { display:flex; flex-direction:column; background:#1b2d45; border:1px solid #35516a; border-radius:9px; padding:12px; }
+.metrics strong { color:#f8fbff; font-size:1.5rem; line-height:1.4; font-variant-numeric:tabular-nums; }
+.metrics span { font-size:.75rem; color:#b9cce1; }
+.scope-note { border-left:3px solid #7096bb; background:#1a2b3e; border-radius:0 8px 8px 0; padding:12px; color:#c9d9e6; }
+.component-drawer { margin:20px 0; padding:16px; }
+.component-drawer > summary { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:5px; }
+.component-drawer summary::marker { color:var(--accent); }
+.component-drawer[open] .drawer-hint { display:none; }
+.drawer-hint { font-size:.8rem; color:var(--text-muted); font-weight:400; }
+.component-drawer .photo-grid { margin:22px 0 5px; }
+#actual-build, #interface, #experiments, #component-photos { scroll-margin-top:100px; }
+@media(max-width:840px){ .eve-layout { grid-template-columns:1fr; } .photo-grid-link { max-width:unset; } }
+@media(max-width:680px){ .eve-panel {padding:18px;} .photo-grid-operations {grid-template-columns:repeat(2,minmax(0,1fr));} .photo-grid-operations .photo-card figcaption { min-height:0; } }
+@media(max-width:430px){ .photo-grid-operations{grid-template-columns:1fr;} .metrics strong{font-size:1.25rem;} }
+@media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .photo-link img{transition:none;} }
 </style>
 </head>
 <body>
-<main>
-<div class="readme-center">
-  <h1>🔐 DIY Quantum Key Distribution (QKD)</h1>
-  <h3>BB84 theory, schematics, calibration and live Alice–Bob demonstration</h3>
-  <p><strong>A three-part DIY educational build using ESP32 boards, servo-driven polarization control, a polarizing beam splitter and OPT101 optical sensors.</strong></p>
-  <p class="meta-line"><a href="https://github.com/limnesh/QKDDevicesDIY" target="_blank" rel="noopener noreferrer">GitHub project page</a> · Bahrain · DIY optics + embedded systems · Educational simulation</p>
-  <p><strong>This repository accompanies the YouTube video series, build notes, wiring diagram and calibration references.</strong></p>
-  <nav class="jump-nav" aria-label="On this page">
-    <a href="#actual-build">Device photos</a>
-    <a href="#component-photos">Components</a>
-    <a href="#videos">Videos</a>
-    <a href="#wiring">Wiring</a>
-    <a href="#calibration">Calibration</a>
-  </nav>
+<main><div class="readme-center">
+<h1>🔐 DIY Quantum Key Distribution (QKD)</h1>
+<h3>BB84 theory, schematics, calibration and live Alice–Bob demonstration</h3>
+<p><strong>A three-part DIY educational build using ESP32 boards, servo-driven polarization control, a polarizing beam splitter and OPT101 optical sensors.</strong></p>
+<p class="meta-line"><a href="https://github.com/limnesh/QKDDevicesDIY" rel="noopener noreferrer" target="_blank">GitHub project page</a> · Bahrain · DIY optics + embedded systems · Educational simulation</p>
+<p><strong>This repository accompanies the YouTube video series, build notes, wiring diagram and calibration references.</strong></p>
+<nav aria-label="Jump to a section of this project" class="jump-nav"><a href="#actual-build">Devices</a><a href="#interface">Controls</a><a href="#experiments">Optical tests</a><a href="#eve-simulation">Eve simulation</a><a href="#component-photos">Components</a><a href="#videos">Videos</a><a href="#theory">BB84 theory</a><a href="#wiring">Wiring</a><a href="#firmware">Firmware</a><a href="#calibration">Calibration</a><a href="#resources">Links</a></nav>
+</div><section class="hardware-gallery" id="actual-build">
+<div class="section-intro">
+<span class="gallery-kicker">01 · PHYSICAL PROTOTYPE</span>
+<h2>The actual Alice and Bob devices</h2>
+<p>Explore the ESP32-based transmitter and receiver, the free-space optical link, and their working on-device displays. These are photographs of the project hardware, not conceptual renderings. Click any image to view it in full.</p>
+</div>
+<div class="photo-grid photo-grid-featured"><figure class="photo-card photo-featured">
+<a aria-label="View larger: Alice — assembled transmitter" class="photo-link" data-caption="Alice — assembled transmitter" data-preview="true" href="images/TransmitterAssembly-Alice.webp">
+<img alt="The real Alice transmitter assembly with its mounted optical elements and servo-driven stages." decoding="async" loading="lazy" src="images/TransmitterAssembly-Alice.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Alice — assembled transmitter</strong><span>The real Alice transmitter assembly with its mounted optical elements and servo-driven stages.</span></figcaption>
+</figure><figure class="photo-card photo-featured">
+<a aria-label="View larger: Bob — assembled receiver" class="photo-link" data-caption="Bob — assembled receiver" data-preview="true" href="images/ReceiverAssembly-Bob.webp">
+<img alt="The real Bob receiver assembly with beam-splitting optics, sensors and control electronics." decoding="async" loading="lazy" src="images/ReceiverAssembly-Bob.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Bob — assembled receiver</strong><span>The real Bob receiver assembly with beam-splitting optics, sensors and control electronics.</span></figcaption>
+</figure></div><h3>Optical transmission and alignment</h3><p class="gallery-description">The visible laser beam travels between the independently powered transmitter and receiver assemblies.</p><div class="photo-grid photo-grid-link"><figure class="photo-card photo-testing">
+<a aria-label="View larger: Free-space laser transmission" class="photo-link" data-caption="Free-space laser transmission" data-preview="true" href="images/Transmission.webp">
+<img alt="Laser alignment and the optical transmission path in the assembled demonstrator." decoding="async" loading="lazy" src="images/Transmission.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Free-space laser transmission</strong><span>Laser alignment and the optical transmission path in the assembled demonstrator.</span></figcaption>
+</figure></div>
+<div class="section-intro chapter-intro" id="interface">
+<span class="gallery-kicker">02 · CONTROLS &amp; LIVE DISPLAYS</span>
+<h2>Firmware interface and device operation</h2>
+<p>Bob’s on-device keypad menu provides measurement, alignment, link and diagnostic functions. The runtime screens show Alice’s selected transmission state and Bob’s classified optical readings.</p>
+</div>
+<div class="photo-grid photo-grid-operations"><figure class="photo-card photo-testing"><a aria-label="View larger: Bob — 16-option control menu" class="photo-link" data-caption="Bob — 16-option control menu" data-preview="true" href="images/MenuDisplay.webp"><img alt="Bob home screen showing BB84 test, 16-block run, manual control, live alignment, ambient voltage, Wi-Fi, link status and other functions." decoding="async" loading="lazy" src="images/MenuDisplay.webp"/><span aria-hidden="true" class="photo-zoom">⤢</span></a><figcaption><strong>Bob — 16-option control menu</strong><span>Bob home screen showing BB84 test, 16-block run, manual control, live alignment, ambient voltage, Wi-Fi, link status and other functions.</span></figcaption></figure><figure class="photo-card photo-testing">
+<a aria-label="View larger: Alice transmitter display" class="photo-link" data-caption="Alice transmitter display" data-preview="true" href="images/TransmitterDisplay.webp">
+<img alt="On-device display showing the selected basis and bit during the demonstration." decoding="async" loading="lazy" src="images/TransmitterDisplay.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Alice transmitter display</strong><span>On-device display showing the selected basis and bit during the demonstration.</span></figcaption>
+</figure><figure class="photo-card photo-testing">
+<a aria-label="View larger: Bob — mixed-state display" class="photo-link" data-caption="Bob — mixed-state display" data-preview="true" href="images/ReceiverDisplay-SuperpositionQbit.webp">
+<img alt="Receiver-side screen during a basis-mismatch / mixed-intensity observation." decoding="async" loading="lazy" src="images/ReceiverDisplay-SuperpositionQbit.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Bob — mixed-state display</strong><span>Receiver-side screen during a basis-mismatch / mixed-intensity observation.</span></figcaption>
+</figure><figure class="photo-card photo-testing">
+<a aria-label="View larger: Bob — error / mismatch indication" class="photo-link" data-caption="Bob — error / mismatch indication" data-preview="true" href="images/ReceiverDisplayWithError.webp">
+<img alt="Receiver screen showing the device’s measured or classified result." decoding="async" loading="lazy" src="images/ReceiverDisplayWithError.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Bob — error / mismatch indication</strong><span>Receiver screen showing the device’s measured or classified result.</span></figcaption>
+</figure></div>
+<div class="section-intro chapter-intro" id="experiments">
+<span class="gallery-kicker">03 · BB84 OPTICAL OBSERVATIONS</span>
+<h2>Basis matching, mismatching and test results</h2>
+<p>With a calibrated matching basis, Bob’s two photodiodes show a dominant output that can be classified as a bit. With different bases, the optical intensities become more evenly distributed and the diagnostic can label a reading as mixed.</p>
+</div>
+<div class="photo-grid photo-grid-testing"><figure class="photo-card photo-testing">
+<a aria-label="View larger: Matching-basis measurement — Received Bit 0 - |0&gt;" class="photo-link" data-caption="Matching-basis measurement — Received Bit 0 - |0&gt;" data-preview="true" href="images/CorrectBasisReception-0.webp">
+<img alt="A matching-basis Bit 0 observation using the optical receiver." decoding="async" loading="lazy" src="images/CorrectBasisReception-0.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Matching-basis measurement — Received Bit 0 - |0&gt;</strong><span>A matching-basis Bit 0 observation using the optical receiver.</span></figcaption>
+</figure><figure class="photo-card photo-testing">
+<a aria-label="View larger: Matching-basis measurement — Received Bit 1 - |1&gt;" class="photo-link" data-caption="Matching-basis measurement — Received Bit 1 - |1&gt;" data-preview="true" href="images/CorrectBasisReception-1.webp">
+<img alt="A matching-basis Bit 1 observation using the optical receiver." decoding="async" loading="lazy" src="images/CorrectBasisReception-1.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Matching-basis measurement — Received Bit 1 - |1&gt;</strong><span>A matching-basis Bit 1 observation using the optical receiver.</span></figcaption>
+</figure><figure class="photo-card photo-testing">
+<a aria-label="View larger: Different-basis measurement" class="photo-link" data-caption="Different-basis measurement" data-preview="true" href="images/WrongBasisReception-SuperpositionQbit.webp">
+<img alt="Optical receiver during a mismatched-basis experiment." decoding="async" loading="lazy" src="images/WrongBasisReception-SuperpositionQbit.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Different-basis measurement</strong><span>Optical receiver during a mismatched-basis experiment.</span></figcaption>
+</figure></div>
+<div class="eve-panel" id="eve-simulation">
+<span class="gallery-kicker">04 · EVE INTERCEPTION SIMULATION</span>
+<h2>Simulated interception — blocks rejected</h2>
+<p>When <strong>Eve interception was simulated</strong>, Alice and Bob’s processing encountered errors and <strong>the firmware rejected affected blocks</strong>. This photograph captures the prototype during that test, showing the rejected-block counter on Alice’s screen.</p>
+<div class="eve-layout"><figure class="photo-card photo-eve"><a aria-label="View larger: Alice display — block rejection during Eve simulation" class="photo-link" data-caption="Alice display — block rejection during Eve simulation" data-preview="true" href="images/BlocksRejection-QBER.webp"><img alt="Alice screen during simulated Eve interception, displaying BLOCK 14/16, REJ 3, ERR 13 and Q 9.6%." decoding="async" loading="lazy" src="images/BlocksRejection-QBER.webp"/><span aria-hidden="true" class="photo-zoom">⤢</span></a><figcaption><strong>Alice display — block rejection during Eve simulation</strong><span>Alice screen during simulated Eve interception, displaying BLOCK 14/16, REJ 3, ERR 13 and Q 9.6%.</span></figcaption></figure>
+<div class="eve-details">
+<h3>What the screenshot records</h3>
+<div class="metrics">
+<div><strong>14 / 16</strong><span>Block progress</span></div>
+<div><strong>3</strong><span>Rejected blocks (REJ)</span></div>
+<div><strong>13</strong><span>Error counter (ERR)</span></div>
+<div><strong>9.6%</strong><span>Displayed Q value</span></div>
+</div>
+<p>The rejection shown is the prototype’s programmed response to the simulated interception and elevated errors. The display also shows <strong>SIFT 1098</strong> at this moment.</p>
+<p class="scope-note">This demonstrates educational error detection and block-rejection logic using classical optical measurements. It does not independently verify a real-world eavesdropper or provide a quantum-security guarantee.</p>
+</div>
+</div>
 </div>
 
-<section id="actual-build" class="hardware-gallery" aria-labelledby="actual-build-title">
-  <div class="section-intro">
-    <span class="gallery-kicker">ACTUAL HARDWARE · BUILD PHOTOGRAPHS</span>
-    <h2 id="actual-build-title">📸 The real Alice and Bob devices</h2>
-    <p>Start with the physical prototype. These are photographs of the DIY transmitter and receiver, followed by their displays, optical tests and the individual components used in the build. Select any photograph to see it larger.</p>
-  </div>
-  <div class="photo-grid photo-grid-featured">
-      <figure class="photo-card photo-featured">
-        <a class="photo-link" href="images/TransmitterAssembly-Alice.webp" data-preview="true" data-caption="Alice — assembled transmitter" aria-label="View larger: Alice — assembled transmitter">
-          <img src="images/TransmitterAssembly-Alice.webp" alt="The real Alice transmitter assembly with its mounted optical elements and servo-driven stages." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Alice — assembled transmitter</strong><span>The real Alice transmitter assembly with its mounted optical elements and servo-driven stages.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-featured">
-        <a class="photo-link" href="images/ReceiverAssembly-Bob.webp" data-preview="true" data-caption="Bob — assembled receiver" aria-label="View larger: Bob — assembled receiver">
-          <img src="images/ReceiverAssembly-Bob.webp" alt="The real Bob receiver assembly with beam-splitting optics, sensors and control electronics." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Bob — assembled receiver</strong><span>The real Bob receiver assembly with beam-splitting optics, sensors and control electronics.</span></figcaption>
-      </figure>
-  </div>
-  <h3 id="demo-photos">Live displays and optical experiments</h3>
-  <p class="gallery-description">Photos from the free-space link, onboard screens and basis-dependent intensity demonstrations.</p>
-  <div class="photo-grid photo-grid-testing">
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/Transmission.webp" data-preview="true" data-caption="Free-space laser transmission" aria-label="View larger: Free-space laser transmission">
-          <img src="images/Transmission.webp" alt="Laser alignment and the optical transmission path in the assembled demonstrator." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Free-space laser transmission</strong><span>Laser alignment and the optical transmission path in the assembled demonstrator.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/TransmitterDisplay.webp" data-preview="true" data-caption="Alice transmitter display" aria-label="View larger: Alice transmitter display">
-          <img src="images/TransmitterDisplay.webp" alt="On-device display showing the selected basis and bit during the demonstration." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Alice transmitter display</strong><span>On-device display showing the selected basis and bit during the demonstration.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/ReceiverDisplay-SuperpositionQbit.webp" data-preview="true" data-caption="Bob — mixed-state display" aria-label="View larger: Bob — mixed-state display">
-          <img src="images/ReceiverDisplay-SuperpositionQbit.webp" alt="Receiver-side screen during a basis-mismatch / mixed-intensity observation." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Bob — mixed-state display</strong><span>Receiver-side screen during a basis-mismatch / mixed-intensity observation.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/ReceiverDisplayWithError.webp" data-preview="true" data-caption="Bob — error / mismatch indication" aria-label="View larger: Bob — error / mismatch indication">
-          <img src="images/ReceiverDisplayWithError.webp" alt="Receiver screen showing the device’s measured or classified result." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Bob — error / mismatch indication</strong><span>Receiver screen showing the device’s measured or classified result.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/CorrectBasisReception-0.webp" data-preview="true" data-caption="Matching-basis measurement — example 1" aria-label="View larger: Matching-basis measurement — example 1">
-          <img src="images/CorrectBasisReception-0.webp" alt="Photographs of the optical detector arrangement during a matching-basis test." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Matching-basis measurement — example 1</strong><span>Photographs of the optical detector arrangement during a matching-basis test.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/CorrectBasisReception-1.webp" data-preview="true" data-caption="Matching-basis measurement — example 2" aria-label="View larger: Matching-basis measurement — example 2">
-          <img src="images/CorrectBasisReception-1.webp" alt="A second matching-basis observation using the optical receiver." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Matching-basis measurement — example 2</strong><span>A second matching-basis observation using the optical receiver.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-testing">
-        <a class="photo-link" href="images/WrongBasisReception-SuperpositionQbit.webp" data-preview="true" data-caption="Different-basis measurement" aria-label="View larger: Different-basis measurement">
-          <img src="images/WrongBasisReception-SuperpositionQbit.webp" alt="Optical receiver during a mismatched-basis experiment." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Different-basis measurement</strong><span>Optical receiver during a mismatched-basis experiment.</span></figcaption>
-      </figure>
-  </div>
-  <h3 id="component-photos">Components used in the prototype</h3>
-  <p class="gallery-description">A photographic inventory of the main electronics, polarization optics, detectors, mechanical parts and connectors. The wiring diagrams and measured calibration results follow later on this page.</p>
-  <div class="photo-grid photo-grid-components">
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/ESP32.webp" data-preview="true" data-caption="ESP32 controller" aria-label="View larger: ESP32 controller">
-          <img src="images/ESP32.webp" alt="Microcontroller board used for device control." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>ESP32 controller</strong><span>Microcontroller board used for device control.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/LaserTransmtter.webp" data-preview="true" data-caption="650 nm laser transmitter" aria-label="View larger: 650 nm laser transmitter">
-          <img src="images/LaserTransmtter.webp" alt="Visible-light source used for the optical demonstration." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>650 nm laser transmitter</strong><span>Visible-light source used for the optical demonstration.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/ServoMotors.webp" data-preview="true" data-caption="Servo motor" aria-label="View larger: Servo motor">
-          <img src="images/ServoMotors.webp" alt="Servo drive for rotating the polarization-control stages." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Servo motor</strong><span>Servo drive for rotating the polarization-control stages.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/PolarizerSticker.webp" data-preview="true" data-caption="Linear polarizer film" aria-label="View larger: Linear polarizer film">
-          <img src="images/PolarizerSticker.webp" alt="Polarizing film in the optical setup." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Linear polarizer film</strong><span>Polarizing film in the optical setup.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/HalfWavePlate-Sticker.webp" data-preview="true" data-caption="Retarder / HWP film" aria-label="View larger: Retarder / HWP film">
-          <img src="images/HalfWavePlate-Sticker.webp" alt="Film used for servo-driven polarization adjustments." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Retarder / HWP film</strong><span>Film used for servo-driven polarization adjustments.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/PolarizingBeamSplitter.webp" data-preview="true" data-caption="Polarizing beam splitter" aria-label="View larger: Polarizing beam splitter">
-          <img src="images/PolarizingBeamSplitter.webp" alt="Optical element that separates the two polarization outputs." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Polarizing beam splitter</strong><span>Optical element that separates the two polarization outputs.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/50-50BeamSplitter.webp" data-preview="true" data-caption="50/50 beam splitter" aria-label="View larger: 50/50 beam splitter">
-          <img src="images/50-50BeamSplitter.webp" alt="Additional non-polarizing optical splitter for experiments." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>50/50 beam splitter</strong><span>Additional non-polarizing optical splitter for experiments.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/OPT101.webp" data-preview="true" data-caption="OPT101 light sensor module" aria-label="View larger: OPT101 light sensor module">
-          <img src="images/OPT101.webp" alt="Photodiode amplifier module used for received intensity measurements." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>OPT101 light sensor module</strong><span>Photodiode amplifier module used for received intensity measurements.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/OpticalSensor.webp" data-preview="true" data-caption="Alternative optical sensor" aria-label="View larger: Alternative optical sensor">
-          <img src="images/OpticalSensor.webp" alt="Additional photodiode-based light sensor component." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Alternative optical sensor</strong><span>Additional photodiode-based light sensor component.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/ADC-ADS115.webp" data-preview="true" data-caption="ADS1115 ADC" aria-label="View larger: ADS1115 ADC">
-          <img src="images/ADC-ADS115.webp" alt="Analog-to-digital converter for dual sensor readout." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>ADS1115 ADC</strong><span>Analog-to-digital converter for dual sensor readout.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/4x4KeyPad.webp" data-preview="true" data-caption="4 × 4 matrix keypad" aria-label="View larger: 4 × 4 matrix keypad">
-          <img src="images/4x4KeyPad.webp" alt="Keypad for local control of the demonstration." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>4 × 4 matrix keypad</strong><span>Keypad for local control of the demonstration.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/CutAcrylicBoards.webp" data-preview="true" data-caption="Acrylic mounting pieces" aria-label="View larger: Acrylic mounting pieces">
-          <img src="images/CutAcrylicBoards.webp" alt="Custom-cut mounting materials for the optical assemblies." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Acrylic mounting pieces</strong><span>Custom-cut mounting materials for the optical assemblies.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/SunfilmSticker.webp" data-preview="true" data-caption="Neutral-density film" aria-label="View larger: Neutral-density film">
-          <img src="images/SunfilmSticker.webp" alt="Tint film for attenuation experiments." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Neutral-density film</strong><span>Tint film for attenuation experiments.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/USB-Female5V.webp" data-preview="true" data-caption="5 V power connector" aria-label="View larger: 5 V power connector">
-          <img src="images/USB-Female5V.webp" alt="Female USB power connector for the electronics." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>5 V power connector</strong><span>Female USB power connector for the electronics.</span></figcaption>
-      </figure>
-      <figure class="photo-card photo-component">
-        <a class="photo-link" href="images/Connectors.webp" data-preview="true" data-caption="Jumper wires / connectors" aria-label="View larger: Jumper wires / connectors">
-          <img src="images/Connectors.webp" alt="Wiring harness components for the prototype." loading="lazy" decoding="async">
-          <span class="photo-zoom" aria-hidden="true">⤢</span>
-        </a>
-        <figcaption><strong>Jumper wires / connectors</strong><span>Wiring harness components for the prototype.</span></figcaption>
-      </figure>
-  </div>
-  <p class="gallery-footnote">The photographs document a classical optical, BB84-inspired teaching apparatus; they do not establish single-photon operation or quantum security. See <a href="#calibration">measured calibration results</a> for the actual voltage analysis.</p>
-</section>
-<hr class="gallery-divider"/>
-
-<h2 id="videos">🎬 Video series</h2>
+<div class="section-intro chapter-intro" id="component-photos">
+<span class="gallery-kicker">05 · COMPONENT INVENTORY</span>
+<h2>Photographs of the parts used</h2>
+<p>Explore the optical elements, microcontrollers, detectors, servos, connectors and mechanical materials used to assemble the demonstrator.</p>
+</div>
+<details class="component-drawer" open>
+<summary>View the 15 component photographs <span class="drawer-hint">Expand gallery</span></summary>
+<div class="component-gallery-holder"><div class="photo-grid photo-grid-components"><figure class="photo-card photo-component">
+<a aria-label="View larger: ESP32 controller" class="photo-link" data-caption="ESP32 controller" data-preview="true" href="images/ESP32.webp">
+<img alt="Microcontroller board used for device control." decoding="async" loading="lazy" src="images/ESP32.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>ESP32 controller</strong><span>Microcontroller board used for device control.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: 650 nm laser transmitter" class="photo-link" data-caption="650 nm laser transmitter" data-preview="true" href="images/LaserTransmtter.webp">
+<img alt="Visible-light source used for the optical demonstration." decoding="async" loading="lazy" src="images/LaserTransmtter.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>650 nm laser transmitter</strong><span>Visible-light source used for the optical demonstration.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Servo motor" class="photo-link" data-caption="Servo motor" data-preview="true" href="images/ServoMotors.webp">
+<img alt="Servo drive for rotating the polarization-control stages." decoding="async" loading="lazy" src="images/ServoMotors.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Servo motor</strong><span>Servo drive for rotating the polarization-control stages.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Linear polarizer film" class="photo-link" data-caption="Linear polarizer film" data-preview="true" href="images/PolarizerSticker.webp">
+<img alt="Polarizing film in the optical setup." decoding="async" loading="lazy" src="images/PolarizerSticker.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Linear polarizer film</strong><span>Polarizing film in the optical setup.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Retarder / HWP film" class="photo-link" data-caption="Retarder / HWP film" data-preview="true" href="images/HalfWavePlate-Sticker.webp">
+<img alt="Film used for servo-driven polarization adjustments." decoding="async" loading="lazy" src="images/HalfWavePlate-Sticker.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Retarder / HWP film</strong><span>Film used for servo-driven polarization adjustments.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Polarizing beam splitter" class="photo-link" data-caption="Polarizing beam splitter" data-preview="true" href="images/PolarizingBeamSplitter.webp">
+<img alt="Optical element that separates the two polarization outputs." decoding="async" loading="lazy" src="images/PolarizingBeamSplitter.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Polarizing beam splitter</strong><span>Optical element that separates the two polarization outputs.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: 50/50 beam splitter" class="photo-link" data-caption="50/50 beam splitter" data-preview="true" href="images/50-50BeamSplitter.webp">
+<img alt="Additional non-polarizing optical splitter for experiments." decoding="async" loading="lazy" src="images/50-50BeamSplitter.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>50/50 beam splitter</strong><span>Additional non-polarizing optical splitter for experiments.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: OPT101 light sensor module" class="photo-link" data-caption="OPT101 light sensor module" data-preview="true" href="images/OPT101.webp">
+<img alt="Photodiode amplifier module used for received intensity measurements." decoding="async" loading="lazy" src="images/OPT101.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>OPT101 light sensor module</strong><span>Photodiode amplifier module used for received intensity measurements.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Alternative optical sensor" class="photo-link" data-caption="Alternative optical sensor" data-preview="true" href="images/OpticalSensor.webp">
+<img alt="Additional photodiode-based light sensor component." decoding="async" loading="lazy" src="images/OpticalSensor.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Alternative optical sensor</strong><span>Additional photodiode-based light sensor component.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: ADS1115 ADC" class="photo-link" data-caption="ADS1115 ADC" data-preview="true" href="images/ADC-ADS115.webp">
+<img alt="Analog-to-digital converter for dual sensor readout." decoding="async" loading="lazy" src="images/ADC-ADS115.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>ADS1115 ADC</strong><span>Analog-to-digital converter for dual sensor readout.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: 4 × 4 matrix keypad" class="photo-link" data-caption="4 × 4 matrix keypad" data-preview="true" href="images/4x4KeyPad.webp">
+<img alt="Keypad for local control of the demonstration." decoding="async" loading="lazy" src="images/4x4KeyPad.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>4 × 4 matrix keypad</strong><span>Keypad for local control of the demonstration.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Acrylic mounting pieces" class="photo-link" data-caption="Acrylic mounting pieces" data-preview="true" href="images/CutAcrylicBoards.webp">
+<img alt="Custom-cut mounting materials for the optical assemblies." decoding="async" loading="lazy" src="images/CutAcrylicBoards.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Acrylic mounting pieces</strong><span>Custom-cut mounting materials for the optical assemblies.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Neutral-density film" class="photo-link" data-caption="Neutral-density film" data-preview="true" href="images/SunfilmSticker.webp">
+<img alt="Tint film for attenuation experiments." decoding="async" loading="lazy" src="images/SunfilmSticker.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Neutral-density film</strong><span>Tint film for attenuation experiments.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: 5 V power connector" class="photo-link" data-caption="5 V power connector" data-preview="true" href="images/USB-Female5V.webp">
+<img alt="Female USB power connector for the electronics." decoding="async" loading="lazy" src="images/USB-Female5V.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>5 V power connector</strong><span>Female USB power connector for the electronics.</span></figcaption>
+</figure><figure class="photo-card photo-component">
+<a aria-label="View larger: Jumper wires / connectors" class="photo-link" data-caption="Jumper wires / connectors" data-preview="true" href="images/Connectors.webp">
+<img alt="Wiring harness components for the prototype." decoding="async" loading="lazy" src="images/Connectors.webp"/>
+<span aria-hidden="true" class="photo-zoom">⤢</span>
+</a>
+<figcaption><strong>Jumper wires / connectors</strong><span>Wiring harness components for the prototype.</span></figcaption>
+</figure></div></div>
+</details>
+<p class="gallery-footnote">This is a classical optical teaching apparatus inspired by BB84. The laboratory readings are discussed in the <a href="#calibration">measured calibration section</a>.</p>
+</section><section class="content-section" id="videos"><h2>🎬 Video series</h2>
 <p>Watch the project in sequence: theory first, then schematics, then the complete Alice and Bob demonstration.</p>
 <div class="table-scroll"><table>
 <thead><tr><th></th><th>Video</th><th>Watch</th><th>What it covers</th></tr></thead>
 <tbody>
-<tr><td><strong>01 ⚛️</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 1 of 3: QKD Theory – BB84 Protocol</strong></td><td><a href="https://www.youtube.com/watch?v=QQfdprppMUg" target="_blank" rel="noopener noreferrer">Watch Part 1 ↗</a></td><td>Quantum threat, harvest now–decrypt later, BB84 states, sifting, QBER, error correction and privacy amplification concepts.</td></tr>
-<tr><td><strong>02 🧰</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 2 of 3: Schematics</strong></td><td><a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" target="_blank" rel="noopener noreferrer">Watch Part 2 ↗</a></td><td>Circuit and optical architecture for Alice, Bob and optional Eve modes, including sensors, servos and wireless reconciliation.</td></tr>
-<tr><td><strong>03 🔦</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 3 of 3: Alice &amp; Bob Demo</strong></td><td><a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" target="_blank" rel="noopener noreferrer">Watch Part 3 ↗</a></td><td>Physical build, optical alignment, live measurements, sifting and shared-key demonstration across a free-space link.</td></tr>
+<tr><td><strong>01 ⚛️</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 1 of 3: QKD Theory – BB84 Protocol</strong></td><td><a href="https://www.youtube.com/watch?v=QQfdprppMUg" rel="noopener noreferrer" target="_blank">Watch Part 1 ↗</a></td><td>Quantum threat, harvest now–decrypt later, BB84 states, sifting, QBER, error correction and privacy amplification concepts.</td></tr>
+<tr><td><strong>02 🧰</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 2 of 3: Schematics</strong></td><td><a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" rel="noopener noreferrer" target="_blank">Watch Part 2 ↗</a></td><td>Circuit and optical architecture for Alice, Bob and optional Eve modes, including sensors, servos and wireless reconciliation.</td></tr>
+<tr><td><strong>03 🔦</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 3 of 3: Alice &amp; Bob Demo</strong></td><td><a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" rel="noopener noreferrer" target="_blank">Watch Part 3 ↗</a></td><td>Physical build, optical alignment, live measurements, sifting and shared-key demonstration across a free-space link.</td></tr>
 </tbody></table></div>
-<p><strong>📺 <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" target="_blank" rel="noopener noreferrer">Open the full DIY QKD playlist</a></strong></p>
-
-<h2>📷 Selected visuals from the design deck</h2>
-<p>The figures below are adapted from your presentation material and help explain the end-to-end concept for the repository visitor.</p>
-<img class="hero-img" src="images/bb84_flow.png" alt="BB84 QKD simplified flow"/>
-<p class="caption"><strong>Figure 1.</strong> High-level BB84 flow: Alice prepares states, the optical channel carries the pulses, Bob measures them, and post-processing keeps only the useful information.</p>
-<img class="hero-img" src="images/qkd_vpn_replication.png" alt="Secure data replication using QKD-generated AES-256 keys"/>
-<p class="caption"><strong>Figure 2.</strong> Example application concept: using QKD-generated material to support secure keying for site-to-site protected data replication.</p>
-
-<h2>🧠 What this project is — and what it is not</h2>
+<p><strong>📺 <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" rel="noopener noreferrer" target="_blank">Open the full DIY QKD playlist</a></strong></p>
+</section><section class="content-section" id="purpose"><h2>🧠 What this project is — and what it is not</h2>
 <blockquote>
-  <p><strong>Educational disclaimer:</strong> This is a DIY educational simulation inspired by the BB84 protocol. It demonstrates basis selection, detector imbalance, sifting and experimental error-rate analysis using low-cost classical optical components. It is <strong>not</strong> a production-grade or security-validated QKD system.</p>
+<p><strong>Educational disclaimer:</strong> This is a DIY educational simulation inspired by the BB84 protocol. It demonstrates basis selection, detector imbalance, sifting and experimental error-rate analysis using low-cost classical optical components. It is <strong>not</strong> a production-grade or security-validated QKD system.</p>
 </blockquote>
 <p>A full QKD implementation normally requires true single-photon or properly calibrated weak-coherent sources, single-photon detectors (SPDs), careful side-channel analysis, authenticated classical communication and rigorous security proofs. This project instead focuses on learning the ideas with accessible hardware.</p>
-
-<h2>🧩 Main hardware blocks</h2>
+</section><section class="content-section" id="theory"><h2>⚛️ BB84 concepts explained simply</h2>
+<p>In the BB84 idea, Alice randomly chooses a basis and a bit, then encodes that bit into one of four optical states. Bob randomly chooses a basis to measure the incoming pulse. When Bob’s basis matches Alice’s basis, the measurement should agree more strongly with the transmitted state. When the bases do not match, the result should be ambiguous or randomly split.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Alice basis</th><th>Bit</th><th>Conceptual state</th><th>What Bob should see</th></tr></thead>
+<tbody>
+<tr><td><strong>+</strong></td><td>0</td><td>One polarization orientation</td><td>Strong dominance on one detector when Bob uses +</td></tr>
+<tr><td><strong>+</strong></td><td>1</td><td>Orthogonal orientation</td><td>Strong dominance on the other detector when Bob uses +</td></tr>
+<tr><td><strong>×</strong></td><td>0</td><td>Diagonal orientation</td><td>Strong dominance on one detector when Bob uses ×</td></tr>
+<tr><td><strong>×</strong></td><td>1</td><td>Other diagonal orientation</td><td>Strong dominance on the other detector when Bob uses ×</td></tr>
+</tbody></table></div>
+<p>After measurement, Alice and Bob publicly compare <em>bases only</em>. They discard mismatched-basis positions. The remaining matching-basis data become the sifted key material. In a true QKD system, additional authenticated post-processing is required for reconciliation and privacy amplification.</p>
+</section><section class="content-section" id="concept-diagrams"><h2>📷 Selected visuals from the design deck</h2>
+<p>The figures below are adapted from your presentation material and help explain the end-to-end concept for the repository visitor.</p>
+<img alt="BB84 QKD simplified flow" class="hero-img" src="images/bb84_flow.png"/>
+<p class="caption"><strong>Figure 1.</strong> High-level BB84 flow: Alice prepares states, the optical channel carries the pulses, Bob measures them, and post-processing keeps only the useful information.</p>
+<img alt="Secure data replication using QKD-generated AES-256 keys" class="hero-img" src="images/qkd_vpn_replication.png"/>
+<p class="caption"><strong>Figure 2.</strong> Example application concept: using QKD-generated material to support secure keying for site-to-site protected data replication.</p>
+</section><section class="content-section" id="hardware"><h2>🧩 Main hardware blocks</h2>
 <div class="grid-2">
-  <div class="card">
-    <h3>Alice (transmitter)</h3>
-    <ul>
-      <li>ESP32 board</li>
-      <li>650 nm laser module</li>
-      <li>Linear polarizer</li>
-      <li>Half-wave plate (HWP) film on servo</li>
-      <li>Optional low-cost optical attenuator / decoy-state servo stage</li>
-    </ul>
-  </div>
-  <div class="card">
-    <h3>Bob (receiver)</h3>
-    <ul>
-      <li>ESP32 board</li>
-      <li>Receiver-side HWP on servo</li>
-      <li>Polarizing beam splitter (PBS)</li>
-      <li>Two OPT101 sensor channels</li>
-      <li>ADS1115 ADC and 4×4 keypad</li>
-    </ul>
-  </div>
+<div class="card">
+<h3>Alice (transmitter)</h3>
+<ul>
+<li>ESP32 board</li>
+<li>650 nm laser module</li>
+<li>Linear polarizer</li>
+<li>Half-wave plate (HWP) film on servo</li>
+<li>Optional low-cost optical attenuator / decoy-state servo stage</li>
+</ul>
 </div>
-
-<h2 id="wiring">🔌 Professional wiring &amp; optical architecture</h2>
+<div class="card">
+<h3>Bob (receiver)</h3>
+<ul>
+<li>ESP32 board</li>
+<li>Receiver-side HWP on servo</li>
+<li>Polarizing beam splitter (PBS)</li>
+<li>Two OPT101 sensor channels</li>
+<li>ADS1115 ADC and 4×4 keypad</li>
+</ul>
+</div>
+</div>
+</section><section class="content-section" id="build-components"><h2>🛠️ Build components</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>Category</th><th>Typical items</th></tr></thead>
+<tbody>
+<tr><td><strong>Microcontrollers &amp; electronics</strong></td><td>2× ESP32 development boards, ADS1115 ADC, 2× OPT101, 2× micro servos, 4×4 keypad, jumper wires, breadboard/perfboard, 5 V power supply</td></tr>
+<tr><td><strong>Optics</strong></td><td>650 nm laser diode module, linear polarizer film, HWP / retarder film, PBS cube, optional 50/50 non-polarizing beam splitter for Eve mode, 50% sun film attenuator</td></tr>
+<tr><td><strong>Mechanical build</strong></td><td>Clear acrylic sheets, small brackets, mounts, hot glue, fasteners, beam-stop and alignment aids</td></tr>
+</tbody></table></div>
+<div class="grid-2">
+<div>
+<img alt="ESP32 board with screen" class="hero-img" src="images/esp32s3_board.png"/>
+<p class="caption"><strong>Reference image.</strong> Example ESP32-S3 display board style used in the project.</p>
+</div>
+<div class="card">
+<h3>Assembly order</h3>
+<ol>
+<li>Build and test Alice laser switching and the two servo movements.</li>
+<li>Build Bob with the HWP servo, PBS, dual OPT101 channels and ADS1115.</li>
+<li>Verify keypad control and Bob sensor readout.</li>
+<li>Mount the optical components mechanically.</li>
+<li>Do short-range alignment before any longer-distance free-space test.</li>
+</ol>
+</div>
+</div>
+</section><section class="content-section" id="wiring"><h2>🔌 Professional wiring &amp; optical architecture</h2>
 <p>Three vector diagrams separate the <strong>free-space optical path</strong> from the <strong>electrical wiring</strong>. Use the detailed Alice and Bob sheets for connection planning. They have labelled GPIOs, device terminals, power requirements and common-ground notes.</p>
-<img class="diagram-img" src="images/wiring_diagram.svg" alt="Overall optical path and Wi-Fi architecture, Alice to Bob" loading="lazy"/>
-<p class="caption"><strong>Figure 3.</strong> Optical and Wi-Fi connections between two electrically independent units. The red line is light, not an electrical wire. <a href="images/wiring_diagram.png" target="_blank" rel="noopener noreferrer">View PNG version ↗</a></p>
+<img alt="Overall optical path and Wi-Fi architecture, Alice to Bob" class="diagram-img" loading="lazy" src="images/wiring_diagram.svg"/>
+<p class="caption"><strong>Figure 3.</strong> Optical and Wi-Fi connections between two electrically independent units. The red line is light, not an electrical wire. <a href="images/wiring_diagram.png" rel="noopener noreferrer" target="_blank">View PNG version ↗</a></p>
 <h3>Alice transmitter — pin-level wiring</h3>
-<a href="images/alice_wiring.svg" target="_blank" rel="noopener noreferrer"><img class="diagram-img" src="images/alice_wiring.svg" alt="Professional Alice GPIO and components schematic" loading="lazy"/></a>
-<p class="caption"><strong>Figure 4.</strong> Alice connections with laser-driver interface and servo signal and power references. <a href="images/alice_wiring.svg" target="_blank" rel="noopener noreferrer">View full-size SVG ↗</a> · <a href="images/alice_wiring.png" target="_blank" rel="noopener noreferrer">View PNG version ↗</a></p>
+<a href="images/alice_wiring.svg" rel="noopener noreferrer" target="_blank"><img alt="Professional Alice GPIO and components schematic" class="diagram-img" loading="lazy" src="images/alice_wiring.svg"/></a>
+<p class="caption"><strong>Figure 4.</strong> Alice connections with laser-driver interface and servo signal and power references. <a href="images/alice_wiring.svg" rel="noopener noreferrer" target="_blank">View full-size SVG ↗</a> · <a href="images/alice_wiring.png" rel="noopener noreferrer" target="_blank">View PNG version ↗</a></p>
 <h3>Bob receiver — pin-level wiring</h3>
-<a href="images/bob_wiring.svg" target="_blank" rel="noopener noreferrer"><img class="diagram-img" src="images/bob_wiring.svg" alt="Professional Bob GPIO, ADS1115, OPT101 and keypad schematic" loading="lazy"/></a>
-<p class="caption"><strong>Figure 5.</strong> Bob I²C, analog sensor and keypad connections with power and ground specifications. <a href="images/bob_wiring.svg" target="_blank" rel="noopener noreferrer">View full-size SVG ↗</a> · <a href="images/bob_wiring.png" target="_blank" rel="noopener noreferrer">View PNG version ↗</a></p>
+<a href="images/bob_wiring.svg" rel="noopener noreferrer" target="_blank"><img alt="Professional Bob GPIO, ADS1115, OPT101 and keypad schematic" class="diagram-img" loading="lazy" src="images/bob_wiring.svg"/></a>
+<p class="caption"><strong>Figure 5.</strong> Bob I²C, analog sensor and keypad connections with power and ground specifications. <a href="images/bob_wiring.svg" rel="noopener noreferrer" target="_blank">View full-size SVG ↗</a> · <a href="images/bob_wiring.png" rel="noopener noreferrer" target="_blank">View PNG version ↗</a></p>
 <h3>Pin map — calibration/video hardware revision</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Unit</th><th>Component</th><th>Signal pins</th><th>Electrical connections / purpose</th></tr></thead><tbody>
@@ -425,66 +493,29 @@
 </tbody></table></div>
 <blockquote><p><strong>Firmware revision matters:</strong> The earlier calibration/video hardware uses Alice <code>GPIO14</code> for the laser and <code>GPIO17</code> for the attenuator servo. The separately documented <em>V2 keypad firmware</em> uses <code>GPIO17</code> for the laser and leaves <code>GPIO14</code> untouched (no decoy motor). <strong>Do not mix the pin maps.</strong> Check <code>LASER_PIN</code> and servo pin definitions in the firmware actually installed before applying power.</p></blockquote>
 <p><strong>Safety:</strong> Do not drive a laser module or servos above ESP32 GPIO current limits. Use a stable servo power supply, common ground within each unit, a suitable laser driver/switch and an effective beam stop. Bob's GPIO20 is used for I²C SCL in this revision; use the appropriate UART debug port rather than conflicting native USB signals.</p>
-<h2>🛠️ Build components</h2>
-<div class="table-scroll"><table>
-<thead><tr><th>Category</th><th>Typical items</th></tr></thead>
-<tbody>
-<tr><td><strong>Microcontrollers &amp; electronics</strong></td><td>2× ESP32 development boards, ADS1115 ADC, 2× OPT101, 2× micro servos, 4×4 keypad, jumper wires, breadboard/perfboard, 5 V power supply</td></tr>
-<tr><td><strong>Optics</strong></td><td>650 nm laser diode module, linear polarizer film, HWP / retarder film, PBS cube, optional 50/50 non-polarizing beam splitter for Eve mode, 50% sun film attenuator</td></tr>
-<tr><td><strong>Mechanical build</strong></td><td>Clear acrylic sheets, small brackets, mounts, hot glue, fasteners, beam-stop and alignment aids</td></tr>
-</tbody></table></div>
-<div class="grid-2">
-  <div>
-    <img class="hero-img" src="images/esp32s3_board.png" alt="ESP32 board with screen"/>
-    <p class="caption"><strong>Reference image.</strong> Example ESP32-S3 display board style used in the project.</p>
-  </div>
-  <div class="card">
-    <h3>Assembly order</h3>
-    <ol>
-      <li>Build and test Alice laser switching and the two servo movements.</li>
-      <li>Build Bob with the HWP servo, PBS, dual OPT101 channels and ADS1115.</li>
-      <li>Verify keypad control and Bob sensor readout.</li>
-      <li>Mount the optical components mechanically.</li>
-      <li>Do short-range alignment before any longer-distance free-space test.</li>
-    </ol>
-  </div>
-</div>
-
-<h2>⚛️ BB84 concepts explained simply</h2>
-<p>In the BB84 idea, Alice randomly chooses a basis and a bit, then encodes that bit into one of four optical states. Bob randomly chooses a basis to measure the incoming pulse. When Bob’s basis matches Alice’s basis, the measurement should agree more strongly with the transmitted state. When the bases do not match, the result should be ambiguous or randomly split.</p>
-<div class="table-scroll"><table>
-<thead><tr><th>Alice basis</th><th>Bit</th><th>Conceptual state</th><th>What Bob should see</th></tr></thead>
-<tbody>
-<tr><td><strong>+</strong></td><td>0</td><td>One polarization orientation</td><td>Strong dominance on one detector when Bob uses +</td></tr>
-<tr><td><strong>+</strong></td><td>1</td><td>Orthogonal orientation</td><td>Strong dominance on the other detector when Bob uses +</td></tr>
-<tr><td><strong>×</strong></td><td>0</td><td>Diagonal orientation</td><td>Strong dominance on one detector when Bob uses ×</td></tr>
-<tr><td><strong>×</strong></td><td>1</td><td>Other diagonal orientation</td><td>Strong dominance on the other detector when Bob uses ×</td></tr>
-</tbody></table></div>
-<p>After measurement, Alice and Bob publicly compare <em>bases only</em>. They discard mismatched-basis positions. The remaining matching-basis data become the sifted key material. In a true QKD system, additional authenticated post-processing is required for reconciliation and privacy amplification.</p>
-
-<h2>💻 Firmware overview</h2>
+</section><section class="content-section" id="firmware"><h2>💻 Firmware overview</h2>
 <p>The code on both ESP32 boards is split into two roles.</p>
 <div class="grid-2">
-  <div class="card">
-    <h3>Alice code</h3>
-    <ul>
-      <li>Chooses a random basis and bit in automatic mode</li>
-      <li>Moves the Alice HWP servo to the corresponding calibrated angle</li>
-      <li>Controls the laser pulse timing</li>
-      <li>Optionally drives the attenuator / decoy servo</li>
-      <li>Exchanges status with Bob over Wi-Fi / TCP</li>
-    </ul>
-  </div>
-  <div class="card">
-    <h3>Bob code</h3>
-    <ul>
-      <li>Selects a measurement basis</li>
-      <li>Moves Bob’s HWP servo</li>
-      <li>Reads A0 / A1 through the ADS1115</li>
-      <li>Subtracts ambient light and computes detector shares</li>
-      <li>Logs basis matches, rejects weak or mixed events and estimates QBER</li>
-    </ul>
-  </div>
+<div class="card">
+<h3>Alice code</h3>
+<ul>
+<li>Chooses a random basis and bit in automatic mode</li>
+<li>Moves the Alice HWP servo to the corresponding calibrated angle</li>
+<li>Controls the laser pulse timing</li>
+<li>Optionally drives the attenuator / decoy servo</li>
+<li>Exchanges status with Bob over Wi-Fi / TCP</li>
+</ul>
+</div>
+<div class="card">
+<h3>Bob code</h3>
+<ul>
+<li>Selects a measurement basis</li>
+<li>Moves Bob’s HWP servo</li>
+<li>Reads A0 / A1 through the ADS1115</li>
+<li>Subtracts ambient light and computes detector shares</li>
+<li>Logs basis matches, rejects weak or mixed events and estimates QBER</li>
+</ul>
+</div>
 </div>
 <pre><code>Automatic session logic (simplified)
 1. Alice chooses random basis + bit.
@@ -497,10 +528,9 @@
 8. Alice and Bob reveal bases, keep only matched-basis slots.
 9. Bob estimates QBER from the kept bits.
 10. Public checks / fingerprints confirm both sides derived the same sifted sequence.</code></pre>
-
-<h2 id="calibration">📊 Optical calibration — measured results</h2>
+</section><section class="content-section" id="calibration"><h2>📊 Optical calibration — measured results</h2>
 <p>Before the final demonstration, Alice and Bob's half-wave-plate (HWP) servo angles were calibrated using <strong>dual OPT101 sensors and the ADS1115 ADC</strong>. The analysis below comes from the recorded <strong>9–10 November 2026</strong> voltage logs and the earlier <em>BB84 Optical Voltage Analysis</em> report, rather than idealized theoretical curves.</p>
-<img class="hero-img" src="images/calibration_heatmap_5deg.png" alt="Measured signed detector contrast heatmap for the complete 5 degree by 5 degree Alice and Bob servo angle scan" loading="lazy"/>
+<img alt="Measured signed detector contrast heatmap for the complete 5 degree by 5 degree Alice and Bob servo angle scan" class="hero-img" loading="lazy" src="images/calibration_heatmap_5deg.png"/>
 <p class="caption"><strong>Figure 6 — actual measured 5° × 5° calibration heatmap.</strong> Horizontal axis: Bob servo angle (0°–180°); vertical axis: Alice servo angle (0°–180°). Red indicates stronger net A0 output, blue stronger net A1, and pale zones approximately balanced detector contributions. White markers show early candidate angle pairs; final +1 was refined to 29° after this coarse scan.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Recorded calibration measure</th><th>Result</th><th>Meaning</th></tr></thead><tbody>
@@ -520,8 +550,8 @@
 </tbody></table></div>
 <p><strong>Why 29° instead of 25°?</strong> In repeated trials the original Alice +1 angle (25°) gave a wrong-basis contrast of about <strong>20.75%</strong>, outside the diagnostic MIXED region (&lt;15%). After 1° refinement, 29° reduced the repeated wrong-basis contrast to about <strong>6.96%</strong> while retaining <strong>96.27%</strong> contrast in the correct basis.</p>
 <div class="grid-2">
-<div><img class="hero-img" src="images/calibration_29deg_refinement.png" alt="Measured improvement of wrong-basis detector balance after changing Alice angle to 29 degrees" loading="lazy"/><p class="caption"><strong>Figure 7.</strong> How the 29° adjustment improved wrong-basis balance.</p></div>
-<div><img class="hero-img" src="images/calibration_4p5m_validation.png" alt="24 recorded 4.5 metre samples showing matched basis dominant and wrong basis balanced optical classifications" loading="lazy"/><p class="caption"><strong>Figure 8.</strong> Final 4.5 m checks: 12 matched-basis and 12 wrong-basis observations.</p></div>
+<div><img alt="Measured improvement of wrong-basis detector balance after changing Alice angle to 29 degrees" class="hero-img" loading="lazy" src="images/calibration_29deg_refinement.png"/><p class="caption"><strong>Figure 7.</strong> How the 29° adjustment improved wrong-basis balance.</p></div>
+<div><img alt="24 recorded 4.5 metre samples showing matched basis dominant and wrong basis balanced optical classifications" class="hero-img" loading="lazy" src="images/calibration_4p5m_validation.png"/><p class="caption"><strong>Figure 8.</strong> Final 4.5 m checks: 12 matched-basis and 12 wrong-basis observations.</p></div>
 </div>
 <h3>What the firmware measures</h3>
 <p>Each detector channel is read with the laser off and on. The software subtracts the ambient baseline from each optical voltage before comparing their relative strengths:</p>
@@ -542,39 +572,37 @@ A1_share = 100 * D1 / S</code></pre>
 <li>Repeat at the target free-space distance, with changed room lighting; record voltages and update the firmware calibration constants if optical alignment has shifted.</li>
 </ol>
 <blockquote><p><strong>Research interpretation:</strong> The 24-point 4.5 m test supports successful optical/analog separation for this educational apparatus. It does not demonstrate a low quantum bit error rate, single-photon security, or a production-ready QKD key rate. For the full evidence, refer to the original November 2026 voltage analysis report.</p></blockquote>
-<h2>🔗 Continue exploring</h2>
+</section><section class="content-section" id="resources"><h2>🔗 Continue exploring</h2>
 <div class="table-scroll"><table>
 <thead><tr><th>Project / website</th><th>Explore</th></tr></thead>
 <tbody>
-<tr><td><strong>MeetICT &amp; BITEX 2026 — Quantum Security 101</strong></td><td><a href="https://github.com/limnesh/bitex" target="_blank" rel="noopener noreferrer">🔐 GitHub · limnesh/bitex</a></td></tr>
-<tr><td><strong>DPS-QKD over Free-Space Optical Channels — Project Report</strong></td><td><a href="https://limnesh.github.io/QuantumKeyDistribution-DPS/DPS_QKD_FSO_Project_Report_v1.0.html" target="_blank" rel="noopener noreferrer">📖 Read the research report</a></td></tr>
-<tr><td><strong>QKD over Free-Space Optical Communication — Project Report</strong></td><td><a href="https://limnesh.github.io/QuantumKeyDistribution-FSO/QKD_FSO_Project_Report-v1.0.html" target="_blank" rel="noopener noreferrer">📖 Read the project report</a></td></tr>
-<tr><td><strong>3D Couple — Art that changes perspective</strong></td><td><a href="https://3dcouple.com/" target="_blank" rel="noopener noreferrer">🎨 Visit 3dcouple.com</a></td></tr>
-<tr><td><strong>ATCSpeak — Aviation communication practice</strong></td><td><a href="https://www.atcspeak.com" target="_blank" rel="noopener noreferrer">✈️ Visit ATCSpeak</a></td></tr>
+<tr><td><strong>MeetICT &amp; BITEX 2026 — Quantum Security 101</strong></td><td><a href="https://github.com/limnesh/bitex" rel="noopener noreferrer" target="_blank">🔐 GitHub · limnesh/bitex</a></td></tr>
+<tr><td><strong>DPS-QKD over Free-Space Optical Channels — Project Report</strong></td><td><a href="https://limnesh.github.io/QuantumKeyDistribution-DPS/DPS_QKD_FSO_Project_Report_v1.0.html" rel="noopener noreferrer" target="_blank">📖 Read the research report</a></td></tr>
+<tr><td><strong>QKD over Free-Space Optical Communication — Project Report</strong></td><td><a href="https://limnesh.github.io/QuantumKeyDistribution-FSO/QKD_FSO_Project_Report-v1.0.html" rel="noopener noreferrer" target="_blank">📖 Read the project report</a></td></tr>
+<tr><td><strong>3D Couple — Art that changes perspective</strong></td><td><a href="https://3dcouple.com/" rel="noopener noreferrer" target="_blank">🎨 Visit 3dcouple.com</a></td></tr>
+<tr><td><strong>ATCSpeak — Aviation communication practice</strong></td><td><a href="https://www.atcspeak.com" rel="noopener noreferrer" target="_blank">✈️ Visit ATCSpeak</a></td></tr>
 </tbody></table></div>
-
-<h2>👨‍🚀 About the presenter — Limnesh Augustine</h2>
+</section><section class="content-section" id="about"><h2>👨‍🚀 About the presenter — Limnesh Augustine</h2>
 <p><strong>Limnesh Augustine</strong> is an <strong>Electronics and Communication Engineer (BTech)</strong> and <strong>Project Manager at Gulf Business Machines (GBM), Bahrain</strong>, with over two decades of IT experience. He previously served as <strong>Head of IT</strong> for the Works Directorate and subsequently the Planning &amp; Future Systems Directorate at the <strong>Ministry of Interior, Bahrain</strong>, until 2019.</p>
 <p>Beyond technology, he is an internationally recognized <strong>3D anamorphic artist</strong>, a multiple <strong>Guinness World Record holder</strong> (Bahrain and USA), recipient of Italy’s <strong>Madonnari title</strong>, and an <strong>EASA-licensed Private Pilot(Airplane)</strong>. His creative work includes collaborations with <strong>FAO, UNDP, WHO and WWF</strong> and participation in UN-related initiatives. Explore his art at <strong><a href="https://3dcouple.com/" rel="noopener noreferrer" target="_blank">3DCouple.com</a></strong> and his aviation learning project at <strong><a href="https://www.atcspeak.com" rel="noopener noreferrer" target="_blank">ATCSpeak</a></strong>.</p>
 <p>His interests span <strong>Quantum computing, Quantum communication, QKD, free-space optics and AI</strong>. He has completed postgraduate studies in Quantum Communications at <strong>IIT Delhi</strong>, presented a <strong>2025 IEEE paper</strong> on AI-based art evaluation, and won the <strong>2019 Hacking (CTF) competition</strong> organized by CID, Ministry of Interior, Bahrain</p>
 <details>
-  <summary><strong>🛠️ Important implementation notes</strong></summary>
-  <ul>
-    <li><strong>Laser safety:</strong> use a proper beam stop and avoid eye-level beam paths or reflective surfaces.</li>
-    <li><strong>Servo power:</strong> use a stable 5 V supply and common ground between the ESP32 and all external modules.</li>
-    <li><strong>GPIO caution:</strong> if your repository firmware uses different GPIO assignments than the ones shown here, update the table and SVG to match the code before publishing.</li>
-    <li><strong>Terminology caution:</strong> it is safer to describe the output as an educational BB84-inspired key-establishment demonstration rather than a cryptographically validated quantum-secure system.</li>
-  </ul>
+<summary><strong>🛠️ Important implementation notes</strong></summary>
+<ul>
+<li><strong>Laser safety:</strong> use a proper beam stop and avoid eye-level beam paths or reflective surfaces.</li>
+<li><strong>Servo power:</strong> use a stable 5 V supply and common ground between the ESP32 and all external modules.</li>
+<li><strong>GPIO caution:</strong> if your repository firmware uses different GPIO assignments than the ones shown here, update the table and SVG to match the code before publishing.</li>
+<li><strong>Terminology caution:</strong> it is safer to describe the output as an educational BB84-inspired key-establishment demonstration rather than a cryptographically validated quantum-secure system.</li>
+</ul>
 </details>
 
-<footer>
+</section><footer>
   DIY Quantum Key Distribution (QKD) · Educational repository page · Built in BITEX-style layout for GitHub Pages
-</footer>
-</main>
-<dialog id="photo-viewer" class="image-lightbox" aria-label="Enlarged build photograph">
-  <button class="lightbox-close" type="button" aria-label="Close photograph">×</button>
-  <img id="viewer-image" alt="">
-  <p id="viewer-caption"></p>
+</footer></main>
+<dialog aria-label="Enlarged build photograph" class="image-lightbox" id="photo-viewer">
+<button aria-label="Close photograph" class="lightbox-close" type="button">×</button>
+<img alt="" id="viewer-image"/>
+<p id="viewer-caption"></p>
 </dialog>
 <script>
 (function () {
