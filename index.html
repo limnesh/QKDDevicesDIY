@@ -188,6 +188,20 @@ main { max-width: 1120px; }
 @media(max-width:680px){ .eve-panel {padding:18px;} .photo-grid-operations {grid-template-columns:repeat(2,minmax(0,1fr));} .photo-grid-operations .photo-card figcaption { min-height:0; } }
 @media(max-width:430px){ .photo-grid-operations{grid-template-columns:1fr;} .metrics strong{font-size:1.25rem;} }
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} .photo-link img{transition:none;} }
+
+/* Successful key-agreement demonstration — placed after the Eve simulation */
+.success-panel { scroll-margin-top:100px; margin:30px 0 34px; padding:28px; background:linear-gradient(125deg,#122538 0%,#101b2e 85%); border:1px solid #43856f; border-radius:16px; }
+.success-panel h2 { border:0; margin:9px 0 14px; padding:0; }
+.success-panel > p { color:#cad9e8; }
+.success-layout { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:22px; align-items:start; margin-top:22px; }
+.photo-success .photo-link { aspect-ratio: 662/586; }
+.photo-success .photo-link img { object-fit:contain; }
+.success-details h3 { margin:3px 0 15px; }
+.success-details p { font-size:.92rem; line-height:1.7; }
+.success-panel .metrics > div { background:#172d3d; border-color:#315e60; }
+.success-panel .metrics strong { color:#8ce7bc; }
+@media (max-width:840px) { .success-layout { grid-template-columns:1fr; } }
+@media (max-width:680px) { .success-panel { padding:18px; } }
 </style>
 </head>
 <body>
@@ -197,7 +211,7 @@ main { max-width: 1120px; }
 <p><strong>A three-part DIY educational build using ESP32 boards, servo-driven polarization control, a polarizing beam splitter and OPT101 optical sensors.</strong></p>
 <p class="meta-line"><a href="https://github.com/limnesh/QKDDevicesDIY" rel="noopener noreferrer" target="_blank">GitHub project page</a> · Bahrain · DIY optics + embedded systems · Educational simulation</p>
 <p><strong>This repository accompanies the YouTube video series, build notes, wiring diagram and calibration references.</strong></p>
-<nav aria-label="Jump to a section of this project" class="jump-nav"><a href="#actual-build">Devices</a><a href="#interface">Controls</a><a href="#experiments">Optical tests</a><a href="#eve-simulation">Eve simulation</a><a href="#component-photos">Components</a><a href="#videos">Videos</a><a href="#theory">BB84 theory</a><a href="#wiring">Wiring</a><a href="#firmware">Firmware</a><a href="#calibration">Calibration</a><a href="#resources">Links</a></nav>
+<nav aria-label="Jump to a section of this project" class="jump-nav"><a href="#actual-build">Devices</a><a href="#interface">Controls</a><a href="#experiments">Optical tests</a><a href="#eve-simulation">Eve simulation</a><a href="#key-success">Key agreed</a><a href="#component-photos">Components</a><a href="#videos">Videos</a><a href="#theory">BB84 theory</a><a href="#wiring">Wiring</a><a href="#firmware">Firmware</a><a href="#calibration">Calibration</a><a href="#resources">Links</a></nav>
 </div><section class="hardware-gallery" id="actual-build">
 <div class="section-intro">
 <span class="gallery-kicker">01 · PHYSICAL PROTOTYPE</span>
@@ -290,8 +304,35 @@ main { max-width: 1120px; }
 </div>
 </div>
 
+
+<div class="success-panel" id="key-success">
+<span class="gallery-kicker">05 · SUCCESSFUL KEY AGREEMENT</span>
+<h2>Alice and Bob — AES-256 demo key agreed</h2>
+<p>In a successful demonstration run, Alice displayed <strong>KEY AGREED</strong> and a shared <strong>256-bit demo key</strong>. The screen recorded <strong>QBER 0.00%</strong> for this run, contrasting with the rejected-block result during the simulated Eve interception shown above.</p>
+<div class="success-layout">
+  <figure class="photo-card photo-success">
+    <a aria-label="View larger: Alice showing successful AES-256 demo key agreement" class="photo-link" data-caption="Successful key agreement — Alice AES-256 demo key" data-preview="true" href="images/AESKeyGenerated.webp">
+      <img alt="Alice display showing AES-256 DEMO KEY, KEY AGREED, RUN 8, RAW 896 and QBER 0.00%, followed by the resulting demonstration key." decoding="async" loading="lazy" src="images/AESKeyGenerated.webp"/>
+      <span aria-hidden="true" class="photo-zoom">⤢</span>
+    </a>
+    <figcaption><strong>Successful key agreement — Alice display</strong><span>KEY AGREED: the 256-bit demonstration key is shown on the device after a completed run.</span></figcaption>
+  </figure>
+  <div class="success-details">
+    <h3>What the successful run shows</h3>
+    <div class="metrics">
+      <div><strong>Agreed</strong><span>Key status</span></div>
+      <div><strong>0.00%</strong><span>Displayed QBER</span></div>
+      <div><strong>8</strong><span>Run number</span></div>
+      <div><strong>896</strong><span>RAW counter</span></div>
+    </div>
+    <p>The firmware completed its educational basis comparison, error checking and key-processing flow and reported an agreed demo key. The screen displays the 64-character hexadecimal representation of the 256-bit value.</p>
+    <p class="scope-note">The device itself labels this a <strong>demo key</strong> and <strong>not quantum-secure QKD</strong>. A displayed agreement and zero error rate for one run do not establish cryptographic security.</p>
+  </div>
+</div>
+</div>
+
 <div class="section-intro chapter-intro" id="component-photos">
-<span class="gallery-kicker">05 · COMPONENT INVENTORY</span>
+<span class="gallery-kicker">06 · COMPONENT INVENTORY</span>
 <h2>Photographs of the parts used</h2>
 <p>Explore the optical elements, microcontrollers, detectors, servos, connectors and mechanical materials used to assemble the demonstrator.</p>
 </div>
