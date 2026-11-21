@@ -202,6 +202,20 @@ main { max-width: 1120px; }
 .success-panel .metrics strong { color:#8ce7bc; }
 @media (max-width:840px) { .success-layout { grid-template-columns:1fr; } }
 @media (max-width:680px) { .success-panel { padding:18px; } }
+
+/* Embedded video series: visible previews with responsive 16:9 players. */
+.video-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:22px 0 16px; }
+.video-card { min-width:0; overflow:hidden; background:#111c2e; border:1px solid #304761; border-radius:15px; }
+.video-number { padding:11px 16px; color:#7bd6ff; font-weight:800; font-size:.77rem; letter-spacing:.1em; background:#172b44; }
+.video-frame { position:relative; width:100%; aspect-ratio:16/9; background:#050b16; }
+.video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+.video-info { padding:12px 16px 18px; }
+.video-info h3 { margin:0 0 7px; font-size:1.1rem; }
+.video-info p { margin:0 0 11px; color:var(--text-muted); font-size:.91rem; line-height:1.6; }
+.video-info a { font-size:.88rem; font-weight:650; }
+.video-card-featured { grid-column:1 / -1; max-width:800px; width:100%; justify-self:center; }
+.video-playlist { margin-top:17px; color:var(--text-muted); }
+@media (max-width:680px) { .video-grid { grid-template-columns:1fr; gap:14px; } .video-card-featured { grid-column:auto; max-width:none; } }
 </style>
 </head>
 <body>
@@ -431,16 +445,46 @@ main { max-width: 1120px; }
 </figure></div></div>
 </details>
 <p class="gallery-footnote">This is a classical optical teaching apparatus inspired by BB84. The laboratory readings are discussed in the <a href="#calibration">measured calibration section</a>.</p>
-</section><section class="content-section" id="videos"><h2>🎬 Video series</h2>
-<p>Watch the project in sequence: theory first, then schematics, then the complete Alice and Bob demonstration.</p>
-<div class="table-scroll"><table>
-<thead><tr><th></th><th>Video</th><th>Watch</th><th>What it covers</th></tr></thead>
-<tbody>
-<tr><td><strong>01 ⚛️</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 1 of 3: QKD Theory – BB84 Protocol</strong></td><td><a href="https://www.youtube.com/watch?v=QQfdprppMUg" rel="noopener noreferrer" target="_blank">Watch Part 1 ↗</a></td><td>Quantum threat, harvest now–decrypt later, BB84 states, sifting, QBER, error correction and privacy amplification concepts.</td></tr>
-<tr><td><strong>02 🧰</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 2 of 3: Schematics</strong></td><td><a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" rel="noopener noreferrer" target="_blank">Watch Part 2 ↗</a></td><td>Circuit and optical architecture for Alice, Bob and optional Eve modes, including sensors, servos and wireless reconciliation.</td></tr>
-<tr><td><strong>03 🔦</strong></td><td><strong>DIY Quantum Key Distribution (QKD) | Part 3 of 3: Alice &amp; Bob Demo</strong></td><td><a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" rel="noopener noreferrer" target="_blank">Watch Part 3 ↗</a></td><td>Physical build, optical alignment, live measurements, sifting and shared-key demonstration across a free-space link.</td></tr>
-</tbody></table></div>
-<p><strong>📺 <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" rel="noopener noreferrer" target="_blank">Open the full DIY QKD playlist</a></strong></p>
+</section><section class="content-section" id="videos" aria-labelledby="videos-heading">
+  <span class="gallery-kicker">WATCH THE PROJECT · THREE-PART SERIES</span>
+  <h2 id="videos-heading">🎬 Watch the QKD experiment</h2>
+  <p>See how the BB84 ideas connect to the actual Alice and Bob hardware. The videos play directly here, beginning with the theory, followed by the electronics and the live demonstration.</p>
+  <div class="video-grid">
+    <article class="video-card">
+      <div class="video-number">PART 01 · THEORY</div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/QQfdprppMUg" title="Part 1 of 3: QKD Theory and BB84 Protocol" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <h3>QKD Theory — BB84 Protocol</h3>
+        <p>Quantum threats, basis selection, sifting, QBER, error correction and privacy amplification.</p>
+        <a href="https://www.youtube.com/watch?v=QQfdprppMUg" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+      </div>
+    </article>
+    <article class="video-card">
+      <div class="video-number">PART 02 · HARDWARE</div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/PlUNMTqOUZk" title="Part 2 of 3: DIY QKD Schematics and Hardware" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Schematics and Hardware</h3>
+        <p>Alice, Bob and optional Eve architecture: optics, servos, sensors and embedded controllers.</p>
+        <a href="https://www.youtube.com/watch?v=PlUNMTqOUZk" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+      </div>
+    </article>
+    <article class="video-card video-card-featured">
+      <div class="video-number">PART 03 · LIVE DEMONSTRATION</div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/szPJ-WF4D5k" title="Part 3 of 3: Live Alice and Bob DIY QKD Demonstration" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Alice &amp; Bob — Live Demonstration</h3>
+        <p>The physical free-space link, alignment, optical measurements, basis sifting and shared AES-256 demonstration key.</p>
+        <a href="https://www.youtube.com/watch?v=szPJ-WF4D5k" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+      </div>
+    </article>
+  </div>
+  <p class="video-playlist">Prefer watching in sequence? <a href="https://www.youtube.com/playlist?list=PLFDmCrpFyzEY" target="_blank" rel="noopener noreferrer">Open the complete YouTube playlist ↗</a></p>
 </section><section class="content-section" id="purpose"><h2>🧠 What this project is — and what it is not</h2>
 <blockquote>
 <p><strong>Educational disclaimer:</strong> This is a DIY educational simulation inspired by the BB84 protocol. It demonstrates basis selection, detector imbalance, sifting and experimental error-rate analysis using low-cost classical optical components. It is <strong>not</strong> a production-grade or security-validated QKD system.</p>
