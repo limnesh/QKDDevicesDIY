@@ -5,11 +5,11 @@
 
 **ESP32-S3 · Free-space optics · Polarization · Calibration · Key-processing experiments**
 
-**[📖 Project documentation](index.html)** · **[🎬 Watch the complete video series](https://www.youtube.com/playlist?list=PLFDmCrpFyzEY)** · **[🔌 Wiring diagrams](#hardware-and-wiring)** · **[📊 Calibration results](#optical-calibration-and-measured-results)**
+**[📖 View the complete illustrated project report](https://limnesh.github.io/QKDDevicesDIY/)** · **[🎬 Watch the complete video series](https://www.youtube.com/playlist?list=PLFDmCrpFyzEY)** · **[🔌 Wiring diagrams](#hardware-and-wiring)** · **[📊 Calibration results](#optical-calibration-and-measured-results)**
 
 </div>
 
-![BB84-inspired QKD concept and workflow](qkd_repo_assets/bb84_flow.png)
+![BB84-inspired QKD concept and workflow](images/bb84_flow.png)
 
 > [!IMPORTANT]
 > **Educational demonstration, not quantum-secure QKD.** This project uses a conventional 650 nm laser, polarization optics and analog photodiodes to *simulate key parts of the BB84 workflow*. It does **not** prepare and measure security-validated single-photon quantum states, and its 256-bit output must not be treated as a cryptographically secure key for real systems. A practical QKD implementation needs suitable quantum optical sources and detectors, authenticated classical communication, security analysis and careful device/side-channel controls.
@@ -36,6 +36,23 @@ The practical objective is to make the physics, electronics and software stages 
 | Calibration dataset | **3,587** logged voltage rows; complete **1,369-point** 5° × 5° grid |
 | Validation | 4.5 m recorded calibration checks; approximately 5 m demonstration shown in video |
 
+## 📷 Actual Alice and Bob hardware
+
+These are photographs of the completed educational prototype. For additional build photos and descriptions, see the **[illustrated project website](https://limnesh.github.io/QKDDevicesDIY/)**.
+
+| Alice — transmitter | Bob — receiver |
+|---|---|
+| ![Assembled Alice transmitter](images/TransmitterAssembly-Alice.webp) | ![Assembled Bob receiver](images/ReceiverAssembly-Bob.webp) |
+
+### On-device controls and experimental results
+
+| Bob control menu | Eve-interception simulation | Successful demo-key agreement |
+|---|---|---|
+| ![Bob's menu options on screen](images/MenuDisplay.webp) | ![Block rejection and error indicator in the simulated Eve experiment](images/BlocksRejection-QBER.webp) | ![Alice's successful 256-bit demonstration key agreement display](images/AESKeyGenerated.webp) |
+| On-device menu for running tests, alignment and settings. | During the **simulated Eve interception**, errors were observed and candidate blocks were rejected. The pictured run displays **REJ: 3** and **Q: 9.6%**. | A separate successful run displays **KEY AGREED**, **RAW 896** and **QBER 0.00%**, with a matching 256-bit *demonstration* output. |
+
+**Interpretation:** These are firmware-reported educational results. The simulated Eve scenario is not a validated security test, and the classical-light setup does not provide quantum-secure key material.
+
 ## 🎬 Three-part video series
 
 | Part | Video | Focus |
@@ -44,7 +61,13 @@ The practical objective is to make the physics, electronics and software stages 
 | **02** | **[Schematics — Alice, Bob & Eve](https://www.youtube.com/watch?v=PlUNMTqOUZk)** | ESP32 electronics, optical components, sensors, servos and eavesdropping models |
 | **03** | **[Alice & Bob — DIY Hardware Demonstration](https://www.youtube.com/watch?v=szPJ-WF4D5k)** | Assembly, optical alignment, voltage readings, sifting and full demonstration |
 
-**[▶ Full playlist](https://www.youtube.com/playlist?list=PLFDmCrpFyzEY)** · **[📖 Illustrated build guide](index.html)**
+**Watch the videos:** Click a thumbnail below to open YouTube. The [project website](https://limnesh.github.io/QKDDevicesDIY/) also has playable embedded videos.
+
+| Part 1 — BB84 theory | Part 2 — Schematics | Part 3 — Alice & Bob demo |
+|---|---|---|
+| [![Part 1](https://img.youtube.com/vi/QQfdprppMUg/hqdefault.jpg)](https://www.youtube.com/watch?v=QQfdprppMUg) | [![Part 2](https://img.youtube.com/vi/PlUNMTqOUZk/hqdefault.jpg)](https://www.youtube.com/watch?v=PlUNMTqOUZk) | [![Part 3](https://img.youtube.com/vi/szPJ-WF4D5k/hqdefault.jpg)](https://www.youtube.com/watch?v=szPJ-WF4D5k) |
+
+**[▶ Full playlist](https://www.youtube.com/playlist?list=PLFDmCrpFyzEY)** · **[📖 Illustrated build guide](https://limnesh.github.io/QKDDevicesDIY/)**
 
 ## How the demonstration works
 
@@ -89,7 +112,7 @@ In **actual single-photon BB84**, a wrong-basis measurement yields an unpredicta
 
 ### Alice wiring — current V7 firmware
 
-[![Alice wiring diagram](qkd_repo_assets/alice_wiring.png)](qkd_repo_assets/alice_wiring.svg)
+[![Alice wiring diagram](images/alice_wiring.png)](images/alice_wiring.svg)
 
 | Function | Alice GPIO | Notes |
 |---|---|---|
@@ -100,7 +123,7 @@ In **actual single-photon BB84**, a wrong-basis measurement yields an unpredicta
 
 ### Bob wiring — current V7 firmware
 
-[![Bob wiring diagram](qkd_repo_assets/bob_wiring.png)](qkd_repo_assets/bob_wiring.svg)
+[![Bob wiring diagram](images/bob_wiring.png)](images/bob_wiring.svg)
 
 | Function | Bob pin / channel | Notes |
 |---|---|---|
@@ -111,7 +134,7 @@ In **actual single-photon BB84**, a wrong-basis measurement yields an unpredicta
 | Keypad row pins | **11, 12, 13, 14** | Rows R1–R4 |
 | Keypad column pins | **18, 8, 9, 10** | Columns C1–C4 |
 
-**[View combined optical and control diagram (SVG)](qkd_repo_assets/wiring_diagram.svg)**
+**[View combined optical and control diagram (SVG)](images/wiring_diagram.svg)**
 
 > [!WARNING]
 > **Hardware revisions matter.** The current `AliceProject/src/main.cpp` defines the laser on **GPIO14** and reserves **GPIO17** without actuating the attenuator servo. Some earlier experiments/diagrams refer to a separately controlled attenuation stage. Check the actual source pin definitions **before wiring or powering the hardware**. Servo supplies need adequate 5 V current with common ground; use a physical laser cutoff and a non-reflective beam stop. Keep the beam below eye level and never look into a direct or reflected laser beam.
@@ -120,7 +143,7 @@ In **actual single-photon BB84**, a wrong-basis measurement yields an unpredicta
 
 The HWP positions were derived experimentally, not assumed from nominal polarizer angles. The 9–10 November 2026 study recorded **3,587** voltage observations across 10 log files. A full **37 × 37** scan measured Alice and Bob servo positions from 0° to 180° in 5° increments (**1,369 combinations**). Detector balance was then refined with smaller angle steps.
 
-[![Measured 5-degree Alice/Bob calibration heatmap](qkd_repo_assets/calibration_heatmap_5deg.png)](qkd_repo_assets/calibration_heatmap_5deg.png)
+[![Measured 5-degree Alice/Bob calibration heatmap](images/calibration_heatmap_5deg.png)](images/calibration_heatmap_5deg.png)
 
 *Measured signed detector contrast: red indicates stronger net A0, blue stronger net A1, and pale regions show approximately balanced optical outputs. The white markers indicate candidate positions from the coarse scan.*
 
@@ -142,7 +165,7 @@ The initial `+1` candidate at **25°** was revised to **29°** after repeated wr
 | Signed detector difference | `d = (D0 − D1) / S` for `S > 0` |
 | Optical contrast | `100 × abs(d)` (%), where 0% is balanced and 100% is one-channel dominant |
 
-**More calibration details and supporting plots:** [Open the illustrated documentation](index.html).
+**More calibration details and supporting plots:** [Open the complete illustrated report](https://limnesh.github.io/QKDDevicesDIY/).
 
 ### Repeat the alignment
 
@@ -166,8 +189,8 @@ QKDDevicesDIY/
 │   ├── platformio.ini
 │   ├── include/              # Shared protocol, display and block helpers
 │   └── src/main.cpp
-├── qkd_repo_assets/          # Wiring diagrams, calibration figures and illustrations
-├── index.html                # Detailed project webpage (BITEX-style layout)
+├── images/          # Wiring diagrams, calibration figures and illustrations
+├── index.html                # Detailed project website with embedded YouTube videos
 └── README.md                 # Repository overview
 ```
 
@@ -218,6 +241,9 @@ Open a serial monitor at **115200 baud** for diagnostic output. Bob also provide
 
 ### Bob's main controls
 
+![Bob on-device control menu](images/MenuDisplay.webp)
+
+
 | Physical key | Function |
 |---:|---|
 | **01** | 32-slot test (one train; no final key) |
@@ -226,6 +252,7 @@ Open a serial monitor at **115200 baud** for diagnostic output. Bob also provide
 | **04** | Optical alignment menu |
 | **05** | Ambient voltage measurement |
 | **06** | Settings (thresholds, steps, connection options) |
+| **10** | Demonstration key test (where supported by firmware) |
 | **16** | **STOP / abort laser activity** |
 
 Use manual and alignment modes first; do not begin a full session until all four matched-basis states are reliably classified.
@@ -256,6 +283,8 @@ Use manual and alignment modes first; do not begin a full session until all four
 ## About the project
 
 Created by **Limnesh Augustine** in Bahrain as an accessible, hands-on exploration of quantum communication concepts, embedded electronics and free-space optics. The goal is to support learners and hobbyists who want to experiment with the *ideas* behind BB84 without requiring a laboratory-grade single-photon QKD system.
+
+**Full image gallery, demonstrations and embedded video players:** [QKDDevicesDIY project report](https://limnesh.github.io/QKDDevicesDIY/).
 
 **Questions or improvement ideas?** Open a [GitHub issue](https://github.com/limnesh/QKDDevicesDIY/issues) with the board revision, firmware commit, wiring and relevant serial logs. Contributions should preserve the educational-security disclaimer and identify tested versus experimental hardware configurations.
 
