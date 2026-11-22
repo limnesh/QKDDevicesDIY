@@ -4,8 +4,91 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="DIY Quantum Key Distribution (QKD) project page with BB84 theory, build guide, wiring diagram, calibration notes and three-part YouTube series." name="description"/>
-<title>DIY Quantum Key Distribution (QKD) | BB84 Build Guide</title>
+<meta name="description" content="Explore a DIY BB84 Quantum Key Distribution (QKD) simulation using ESP32 Alice–Bob hardware, wiring diagrams, optical calibration, QBER results and videos."/>
+<title>BB84 Protocol Simulation & DIY Quantum Key Distribution | ESP32</title>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<link rel="canonical" href="https://limnesh.github.io/QKDDevicesDIY/"/>
+<link rel="sitemap" type="application/xml" href="https://limnesh.github.io/QKDDevicesDIY/sitemap.xml"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="DIY BB84 Quantum Key Distribution"/>
+<meta property="og:title" content="BB84 Protocol Simulation &amp; DIY Quantum Key Distribution | ESP32"/>
+<meta property="og:description" content="Hands-on BB84-inspired Alice–Bob optical demonstration with ESP32, real calibration results, wiring diagrams, QBER analysis and tutorial videos."/>
+<meta property="og:url" content="https://limnesh.github.io/QKDDevicesDIY/"/>
+<meta property="og:image" content="https://limnesh.github.io/QKDDevicesDIY/images/TransmitterAssembly-Alice.webp"/>
+<meta property="og:image:alt" content="Actual ESP32-based Alice transmitter in the DIY BB84 demonstration"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="BB84 Protocol Simulation &amp; DIY Quantum Key Distribution"/>
+<meta name="twitter:description" content="ESP32 Alice–Bob hardware, BB84 concepts, optical calibration, QBER results and source code."/>
+<meta name="twitter:image" content="https://limnesh.github.io/QKDDevicesDIY/images/TransmitterAssembly-Alice.webp"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://limnesh.github.io/QKDDevicesDIY/#website",
+      "url": "https://limnesh.github.io/QKDDevicesDIY/",
+      "name": "BB84 Protocol Simulation & DIY QKD",
+      "description": "Explore a DIY BB84 Quantum Key Distribution (QKD) simulation using ESP32 Alice–Bob hardware, wiring diagrams, optical calibration, QBER results and videos.",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://limnesh.github.io/QKDDevicesDIY/#project-guide",
+      "url": "https://limnesh.github.io/QKDDevicesDIY/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://limnesh.github.io/QKDDevicesDIY/"
+      },
+      "headline": "BB84 Protocol Simulation & DIY Quantum Key Distribution Using ESP32",
+      "description": "Explore a DIY BB84 Quantum Key Distribution (QKD) simulation using ESP32 Alice–Bob hardware, wiring diagrams, optical calibration, QBER results and videos.",
+      "author": {
+        "@type": "Person",
+        "name": "Limnesh Augustine",
+        "url": "https://github.com/limnesh"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Limnesh Augustine"
+      },
+      "dateModified": "2026-11-22",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "image": [
+        "https://limnesh.github.io/QKDDevicesDIY/images/TransmitterAssembly-Alice.webp",
+        "https://limnesh.github.io/QKDDevicesDIY/images/ReceiverAssembly-Bob.webp"
+      ],
+      "keywords": [
+        "BB84 protocol simulation",
+        "quantum key distribution simulation",
+        "DIY QKD",
+        "ESP32 quantum cryptography",
+        "Alice Bob optical demonstration",
+        "BB84 hardware build",
+        "QBER calibration"
+      ],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "BB84 quantum key distribution protocol"
+        },
+        {
+          "@type": "Thing",
+          "name": "Educational classical-optics demonstration"
+        },
+        {
+          "@type": "Thing",
+          "name": "ESP32-based optical communication"
+        }
+      ],
+      "isPartOf": {
+        "@id": "https://limnesh.github.io/QKDDevicesDIY/#website"
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root {
     color-scheme: dark;
@@ -273,11 +356,12 @@ main { max-width: 1120px; }
 </head>
 <body>
 <main><div class="readme-center">
-<h1>🔐 DIY Quantum Key Distribution (QKD)</h1>
+<h1>🔐 BB84 Protocol Simulation &amp; DIY Quantum Key Distribution (QKD)</h1>
 <h3>BB84 theory, schematics, calibration and live Alice–Bob demonstration</h3>
 <p><strong>A three-part DIY educational build using ESP32 boards, servo-driven polarization control, a polarizing beam splitter and OPT101 optical sensors.</strong></p>
 <p class="meta-line"><a href="https://github.com/limnesh/QKDDevicesDIY" rel="noopener noreferrer" target="_blank">GitHub project page</a> · Bahrain · DIY optics + embedded systems · Educational simulation</p>
 <p><strong>This repository accompanies the YouTube video series, build notes, wiring diagram and calibration references.</strong></p>
+<p>Looking for a <strong>BB84 protocol simulation</strong> or a practical <strong>quantum key distribution simulation</strong>? This publicly documented ESP32 project documents an educational Alice–Bob optical experiment, including free-space polarization control, dual photodiode measurements, QBER diagnostics, 5° optical calibration heatmaps, schematic diagrams and firmware. It uses classical optical components to teach BB84 concepts; it does not claim quantum-secure key distribution.</p>
 <nav aria-label="Jump to a section of this project" class="jump-nav"><a href="#actual-build">Devices</a><a href="#interface">Controls</a><a href="#experiments">Optical tests</a><a href="#eve-simulation">Eve simulation</a><a href="#key-success">Key agreed</a><a href="#component-photos">Components</a><a href="#videos">Videos</a><a href="#theory">BB84 theory</a><a href="#wiring">Wiring</a><a href="#firmware">Firmware</a><a href="#calibration">Calibration</a><a href="#resources">Links</a></nav>
 </div><section class="hardware-gallery" id="actual-build">
 <div class="section-intro">
@@ -777,7 +861,7 @@ A1_share = 100 * D1 / S</code></pre>
 </ul>
 </details>
 </section><footer>
-  DIY Quantum Key Distribution (QKD) · Educational repository page · Built in BITEX-style layout for GitHub Pages
+  DIY BB84 Quantum Key Distribution (QKD) · ESP32 hardware demonstration · Educational project by Limnesh Augustine
 </footer></main>
 <dialog aria-label="Enlarged build photograph" class="image-lightbox" id="photo-viewer">
 <button aria-label="Close photograph" class="lightbox-close" type="button">×</button>
